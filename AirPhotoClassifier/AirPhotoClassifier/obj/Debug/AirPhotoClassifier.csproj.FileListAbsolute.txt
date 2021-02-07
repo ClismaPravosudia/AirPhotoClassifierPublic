@@ -10,7 +10,6 @@ D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\bin\
 D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\bin\Debug\AirPhotoClassifier.exe
 D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\bin\Debug\AirPhotoClassifier.pdb
 D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\bin\Debug\Emgu.CV.Platform.NetStandard.dll
-D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\bin\Debug\Emgu.CV.Platform.NetStandard.xml
 D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\obj\Debug\AirPhotoClassifier.csprojAssemblyReference.cache
 D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\obj\Debug\AirPhotoClassifier.Properties.Resources.resources
 D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\obj\Debug\AirPhotoClassifier.csproj.GenerateResource.cache
@@ -19,3 +18,11 @@ D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\obj\
 D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\obj\Debug\AirPhotoClassifier.exe
 D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\obj\Debug\AirPhotoClassifier.pdb
 D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\bin\Debug\Photo\D1PGFIFSLX5R1521056003282.png
+D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\bin\Debug\Emgu.CV.Bitmap.dll
+D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\bin\Debug\Emgu.CV.Platform.NetFramework.dll
+D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\obj\Debug\AirPhotoClassifier.Form1.resources
+D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\bin\Debug\System.Drawing.Common.dll
+D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\bin\Debug\Emgu.CV.Bitmap.xml
+D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\bin\Debug\Emgu.CV.Platform.NetFramework.xml
+D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\bin\Debug\Emgu.CV.Platform.NetStandard.xml
+D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\bin\Debug\Photo\Despicable-Me-2-moviejpg.jpg
