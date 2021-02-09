@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Emgu.CV;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,15 @@ namespace AirPhotoClassifier.Components
 {
     class ImportImage
     {
+        private Mat _image;
+        public void ShowWindowOpenImage()
+        {
 
+        }
+
+        public Mat GetImage()
+        {
+            return null;
+        }
     }
 }
