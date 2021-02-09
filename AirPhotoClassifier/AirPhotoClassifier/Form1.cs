@@ -47,7 +47,12 @@ namespace AirPhotoClassifier
             image.CopyTo(mask, mask);
 
 
-            imageBox2.Image = mask;
+            //ПРИМЕР РАБОТЫ С СУПЕРПИКСЕЛЯМИ
+            Mat mat = new Mat();
+            supperpixel.GetLabels(mat);
+            
+
+            imageBox2.Image = mat.ToImage<Gray,int>();
         }
     }
 }
