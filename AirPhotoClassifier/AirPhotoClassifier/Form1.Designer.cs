@@ -56,9 +56,9 @@
             // 
             this.imageBoxOriginal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.imageBoxOriginal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imageBoxOriginal.Location = new System.Drawing.Point(12, 277);
+            this.imageBoxOriginal.Location = new System.Drawing.Point(12, 288);
             this.imageBoxOriginal.Name = "imageBoxOriginal";
-            this.imageBoxOriginal.Size = new System.Drawing.Size(169, 164);
+            this.imageBoxOriginal.Size = new System.Drawing.Size(263, 263);
             this.imageBoxOriginal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imageBoxOriginal.TabIndex = 2;
             this.imageBoxOriginal.TabStop = false;
@@ -71,7 +71,7 @@
             this.imageBoxSegmentation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.imageBoxSegmentation.Location = new System.Drawing.Point(293, 12);
             this.imageBoxSegmentation.Name = "imageBoxSegmentation";
-            this.imageBoxSegmentation.Size = new System.Drawing.Size(435, 429);
+            this.imageBoxSegmentation.Size = new System.Drawing.Size(541, 539);
             this.imageBoxSegmentation.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imageBoxSegmentation.TabIndex = 2;
             this.imageBoxSegmentation.TabStop = false;
@@ -97,7 +97,7 @@
             this.groupBox1.Controls.Add(this.buttonImportImage);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(275, 259);
+            this.groupBox1.Size = new System.Drawing.Size(275, 261);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Параметры";
@@ -224,7 +224,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(740, 453);
+            this.ClientSize = new System.Drawing.Size(846, 563);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.imageBoxSegmentation);
             this.Controls.Add(this.imageBoxOriginal);

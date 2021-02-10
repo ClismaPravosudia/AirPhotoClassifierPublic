@@ -1,4 +1,5 @@
-﻿using Emgu.CV;
+﻿using AirPhotoClassifier.Components;
+using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.XImgproc;
@@ -19,6 +20,7 @@ namespace AirPhotoClassifier
 {
     public partial class Form1 : Form
     {
+        private ImportImage import = new ImportImage();
         public Form1()
         {
             InitializeComponent();
@@ -36,20 +38,21 @@ namespace AirPhotoClassifier
 
         private void buttonImportImage_Click(object sender, EventArgs e)
         {
-
+            import.OpenWindow();
         }
 
         private void buttonStartSegmentation_Click(object sender, EventArgs e)
         {
-            Mat image = CvInvoke.Imread("D:\\WORKSPACE\\AirPhotoClassifierPublic\\AirPhotoClassifier\\AirPhotoClassifier\\Photo\\D1PGFIFSLX5R1521056003282.png", Emgu.CV.CvEnum.ImreadModes.AnyColor);
+
+            Mat image = import.GetImage();
 
             imageBoxOriginal.Image = image;
 
             SupperpixelSLIC supperpixel = new SupperpixelSLIC(image,
                                                               SupperpixelSLIC.Algorithm.SLIC,
-                                                              10,
-                                                              10);
-            supperpixel.Iterate(10);
+                                                              (int)  fieldSizeSuperpixel.Value,
+                                                              (float)fieldRuler.Value);
+            supperpixel.Iterate();
 
 
             Matrix<byte> mask= new Matrix<byte>(image.Size);
@@ -68,9 +71,10 @@ namespace AirPhotoClassifier
             //ПРИМЕР РАБОТЫ С СУПЕРПИКСЕЛЯМИ
             Mat mat = new Mat();
             supperpixel.GetLabels(mat);
-
+            int integer = (int)mat.GetDataPointer(0,0);
 
             imageBoxSegmentation.Image = mask;
+
         }
 
         private void fieldRuler_ValueChanged(object sender, EventArgs e)
