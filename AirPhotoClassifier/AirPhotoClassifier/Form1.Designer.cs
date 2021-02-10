@@ -38,9 +38,9 @@
             this.fieldRuler = new System.Windows.Forms.NumericUpDown();
             this.trackBarRuler = new System.Windows.Forms.TrackBar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.fieldSizeSuperpixel = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.trackBarSizeSuperpixel = new System.Windows.Forms.TrackBar();
-            this.fieldSizeSuperpixel = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxOriginal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxSegmentation)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -48,8 +48,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.fieldRuler)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarRuler)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarSizeSuperpixel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fieldSizeSuperpixel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarSizeSuperpixel)).BeginInit();
             this.SuspendLayout();
             // 
             // imageBoxOriginal
@@ -72,7 +72,7 @@
             this.imageBoxSegmentation.Location = new System.Drawing.Point(293, 12);
             this.imageBoxSegmentation.Name = "imageBoxSegmentation";
             this.imageBoxSegmentation.Size = new System.Drawing.Size(541, 539);
-            this.imageBoxSegmentation.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.imageBoxSegmentation.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.imageBoxSegmentation.TabIndex = 2;
             this.imageBoxSegmentation.TabStop = false;
             // 
@@ -174,28 +174,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Размер суперпикселя в пикселях";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(239, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(18, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "px";
-            // 
-            // trackBarSizeSuperpixel
-            // 
-            this.trackBarSizeSuperpixel.LargeChange = 10;
-            this.trackBarSizeSuperpixel.Location = new System.Drawing.Point(6, 19);
-            this.trackBarSizeSuperpixel.Maximum = 300;
-            this.trackBarSizeSuperpixel.Minimum = 10;
-            this.trackBarSizeSuperpixel.Name = "trackBarSizeSuperpixel";
-            this.trackBarSizeSuperpixel.Size = new System.Drawing.Size(160, 45);
-            this.trackBarSizeSuperpixel.TabIndex = 4;
-            this.trackBarSizeSuperpixel.TickFrequency = 10;
-            this.trackBarSizeSuperpixel.Value = 10;
-            this.trackBarSizeSuperpixel.Scroll += new System.EventHandler(this.trackBarSizeSuperpixel_Scroll);
-            // 
             // fieldSizeSuperpixel
             // 
             this.fieldSizeSuperpixel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -220,6 +198,28 @@
             0});
             this.fieldSizeSuperpixel.ValueChanged += new System.EventHandler(this.fieldSizeSuperpixel_ValueChanged);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(239, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(18, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "px";
+            // 
+            // trackBarSizeSuperpixel
+            // 
+            this.trackBarSizeSuperpixel.LargeChange = 10;
+            this.trackBarSizeSuperpixel.Location = new System.Drawing.Point(6, 19);
+            this.trackBarSizeSuperpixel.Maximum = 300;
+            this.trackBarSizeSuperpixel.Minimum = 10;
+            this.trackBarSizeSuperpixel.Name = "trackBarSizeSuperpixel";
+            this.trackBarSizeSuperpixel.Size = new System.Drawing.Size(160, 45);
+            this.trackBarSizeSuperpixel.TabIndex = 4;
+            this.trackBarSizeSuperpixel.TickFrequency = 10;
+            this.trackBarSizeSuperpixel.Value = 10;
+            this.trackBarSizeSuperpixel.Scroll += new System.EventHandler(this.trackBarSizeSuperpixel_Scroll);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -239,8 +239,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarRuler)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarSizeSuperpixel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fieldSizeSuperpixel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarSizeSuperpixel)).EndInit();
             this.ResumeLayout(false);
 
         }

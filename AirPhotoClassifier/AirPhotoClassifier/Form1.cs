@@ -39,15 +39,12 @@ namespace AirPhotoClassifier
         private void buttonImportImage_Click(object sender, EventArgs e)
         {
             import.OpenWindow();
+            imageBoxOriginal.Image = import.GetImage();
         }
 
         private void buttonStartSegmentation_Click(object sender, EventArgs e)
         {
-
             Mat image = import.GetImage();
-
-            imageBoxOriginal.Image = image;
-
             SupperpixelSLIC supperpixel = new SupperpixelSLIC(image,
                                                               SupperpixelSLIC.Algorithm.SLIC,
                                                               (int)  fieldSizeSuperpixel.Value,
@@ -71,7 +68,7 @@ namespace AirPhotoClassifier
             //ПРИМЕР РАБОТЫ С СУПЕРПИКСЕЛЯМИ
             Mat mat = new Mat();
             supperpixel.GetLabels(mat);
-            int integer = (int)mat.GetDataPointer(0,0);
+            int[,] array = (int[,]) mat.GetData();
 
             imageBoxSegmentation.Image = mask;
 

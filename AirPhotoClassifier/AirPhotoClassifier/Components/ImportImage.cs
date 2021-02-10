@@ -1,4 +1,5 @@
 ﻿using Emgu.CV;
+using Emgu.CV.Structure;
 using Emgu.CV.UI;
 using System;
 using System.Collections.Generic;
@@ -15,20 +16,34 @@ namespace AirPhotoClassifier.Components
 {
     class ImportImage
     {
-        private Mat image;
-        private string filename;
+        private Mat _nullMat;
+        private Mat _NullMat
+        {
+            get
+            {
+                if (_nullMat == null)
+                    _nullMat = new Mat();
+                return _nullMat;
+            }
+        }
+
+        private Mat _image;
         public void OpenWindow()
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "jpg|*.jpg| png|*.png";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                filename = ofd.FileName;
+                _image = CvInvoke.Imread(ofd.FileName, Emgu.CV.CvEnum.ImreadModes.AnyColor);
+            }
+            else
+            {
+                _image = _NullMat;
             }
         }
         public Mat GetImage()
         {
-            return CvInvoke.Imread(filename, Emgu.CV.CvEnum.ImreadModes.AnyColor);
+            return _image;
         }
     }
 }
