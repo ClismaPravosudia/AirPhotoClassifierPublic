@@ -13,5 +13,28 @@ namespace AirPhotoClassifier.Components
         private Mat _image;
 
         private SuperPixel[] _superPixels;
+
+        public SegmenеtedImage(Mat image)
+        {
+            Image = image;
+        }
+        public Mat Image
+        {
+            get
+            {
+                return _image;
+            }
+            set
+            {
+                _image = value;
+            }
+        }
+        public Mat Mask
+        {
+            get
+            {
+                return _mask;
+            }
+        }
     }
 }

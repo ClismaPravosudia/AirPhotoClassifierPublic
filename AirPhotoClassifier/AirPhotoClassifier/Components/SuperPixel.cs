@@ -9,6 +9,11 @@ namespace AirPhotoClassifier.Components
 {
     class SuperPixel
     {
-        private Point[] point;
+        private Point[] _points;
+        
+        public SuperPixel(Point[] points)
+        {
+            _points = points;
+        }
     }
 }

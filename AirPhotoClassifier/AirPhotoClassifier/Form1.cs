@@ -21,6 +21,7 @@ namespace AirPhotoClassifier
     public partial class Form1 : Form
     {
         private ImportImage import = new ImportImage();
+        SupperpixelSLIC supperpixel;
         public Form1()
         {
             InitializeComponent();
@@ -45,33 +46,26 @@ namespace AirPhotoClassifier
         private void buttonStartSegmentation_Click(object sender, EventArgs e)
         {
             Mat image = import.GetImage();
-            SupperpixelSLIC supperpixel = new SupperpixelSLIC(image,
-                                                              SupperpixelSLIC.Algorithm.SLIC,
-                                                              (int)  fieldSizeSuperpixel.Value,
-                                                              (float)fieldRuler.Value);
+            if(image == null)
+            {
+                return;
+            }
+            supperpixel = new SupperpixelSLIC(image,
+                                            SupperpixelSLIC.Algorithm.SLIC,
+                                            (int)  fieldSizeSuperpixel.Value,
+                                            (float)fieldRuler.Value);
             supperpixel.Iterate();
 
 
-            Matrix<byte> mask= new Matrix<byte>(image.Size);
+            Image<Gray, byte> mask= new Image<Gray, byte>(image.Size);
 
 
             supperpixel.GetLabelContourMask(mask);
 
-            Matrix<byte> maskss= new Matrix<byte>(image.Size);
-
             CvInvoke.BitwiseNot(mask, mask);
 
-            Matrix<byte> masks= new Matrix<byte>(image.Size);
             image.CopyTo(mask, mask);
-
-
-            //ПРИМЕР РАБОТЫ С СУПЕРПИКСЕЛЯМИ
-            Mat mat = new Mat();
-            supperpixel.GetLabels(mat);
-            int[,] array = (int[,]) mat.GetData();
-
-            imageBoxSegmentation.Image = mask;
-
+            imageBoxOriginal.Image = mask;
         }
 
         private void fieldRuler_ValueChanged(object sender, EventArgs e)
@@ -91,6 +85,31 @@ namespace AirPhotoClassifier
             {
                 trackBarSizeSuperpixel.Value = sizeSuperpixel;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Mat mat = new Mat();
+            supperpixel.GetLabels(mat);
+            int[,] array = (int[,]) mat.GetData();
+
+            Image<Gray,byte> mask = new Image<Gray,byte>(mat.Size);
+
+            for (int width = 0; width < array.GetLength(0); width++)
+            {
+                for (int height = 0; height < array.GetLength(1); height++)
+                {
+                    if (array[width, height] != ((int)numericUpDown1.Value)-1)
+                    {
+                        mask.Data[width, height, 0] = 255;
+                    }
+
+                }
+            }
+
+            import.GetImage().CopyTo(mask, mask);
+
+            imageBoxSegmentation.Image =  mask;
         }
     }
 }

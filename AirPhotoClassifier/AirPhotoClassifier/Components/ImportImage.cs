@@ -16,17 +16,6 @@ namespace AirPhotoClassifier.Components
 {
     class ImportImage
     {
-        private Mat _nullMat;
-        private Mat _NullMat
-        {
-            get
-            {
-                if (_nullMat == null)
-                    _nullMat = new Mat();
-                return _nullMat;
-            }
-        }
-
         private Mat _image;
         public void OpenWindow()
         {
@@ -38,7 +27,7 @@ namespace AirPhotoClassifier.Components
             }
             else
             {
-                _image = _NullMat;
+                _image = null;
             }
         }
         public Mat GetImage()
