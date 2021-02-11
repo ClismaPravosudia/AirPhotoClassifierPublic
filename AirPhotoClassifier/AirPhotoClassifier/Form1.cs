@@ -126,9 +126,33 @@ namespace AirPhotoClassifier
         private void imageBoxSegmentation_MouseMove(object sender, MouseEventArgs e)
         {
 
-            Point mousePostotion =  new Point();
+            Point mousePostotion = new Point();
+            
             mousePostotion.X = imageBoxSegmentation.HorizontalScrollBar.Value + (int)(e.X / imageBoxSegmentation.ZoomScale);
             mousePostotion.Y = imageBoxSegmentation.VerticalScrollBar.Value + (int)(e.Y / imageBoxSegmentation.ZoomScale);
+            label2.Text = imageBoxSegmentation.HorizontalScrollBar.Value.ToString();
+            label3.Text = imageBoxSegmentation.ZoomScale.ToString();
+
+            //интерактив
+            Mat mat = new Mat();
+            supperpixel.GetLabels(mat);
+            int[,] array = (int[,])mat.GetData();
+
+            Image<Gray, byte> mask = new Image<Gray, byte>(mat.Size);
+
+            for (int width = 0; width < array.GetLength(0); width++)
+            {
+                for (int height = 0; height < array.GetLength(1); height++)
+                {
+                    if (array[width, height] != (array[ (int)(mousePostotion.Y), (int)(mousePostotion.X)]))
+                    {
+                        mask.Data[width, height, 0] = 255;
+                    }
+
+                }
+            }
+            import.GetImage().CopyTo(mask, mask);
+            imageBoxSegmentation.Image = mask;
         }
     }
 }

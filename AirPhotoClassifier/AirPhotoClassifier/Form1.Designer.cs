@@ -43,6 +43,8 @@
             this.fieldSizeSuperpixel = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.trackBarSizeSuperpixel = new System.Windows.Forms.TrackBar();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxOriginal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxSegmentation)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -74,7 +76,6 @@
             this.imageBoxSegmentation.Location = new System.Drawing.Point(293, 12);
             this.imageBoxSegmentation.Name = "imageBoxSegmentation";
             this.imageBoxSegmentation.Size = new System.Drawing.Size(595, 616);
-            this.imageBoxSegmentation.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imageBoxSegmentation.TabIndex = 2;
             this.imageBoxSegmentation.TabStop = false;
             this.imageBoxSegmentation.MouseMove += new System.Windows.Forms.MouseEventHandler(this.imageBoxSegmentation_MouseMove);
@@ -94,6 +95,8 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.numericUpDown1);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.buttonStartSegmentation);
@@ -102,7 +105,7 @@
             this.groupBox1.Controls.Add(this.buttonImportImage);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(275, 338);
+            this.groupBox1.Size = new System.Drawing.Size(275, 347);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Параметры";
@@ -259,6 +262,24 @@
             this.trackBarSizeSuperpixel.Value = 10;
             this.trackBarSizeSuperpixel.Scroll += new System.EventHandler(this.trackBarSizeSuperpixel_Scroll);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 321);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "label2";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(137, 321);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "label3";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -272,6 +293,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxOriginal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxSegmentation)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -300,6 +322,8 @@
         private System.Windows.Forms.NumericUpDown fieldSizeSuperpixel;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
     }
 }
 

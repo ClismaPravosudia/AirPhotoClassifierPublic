@@ -141,6 +141,7 @@
     <Content Include="Photo\Despicable-Me-2-moviejpg.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Photo\NBA-pLnWwg0.jpg" />
     <Content Include="System.Runtime.InteropServices.RuntimeInformation.dll" />
     <Content Include="vcruntime140.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
