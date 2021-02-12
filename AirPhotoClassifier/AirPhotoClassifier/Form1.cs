@@ -22,11 +22,12 @@ namespace AirPhotoClassifier
 {
     public partial class Form1 : Form
     {
-        private ImportImage import = new ImportImage();
-        SupperpixelSLIC supperpixel;
+        private ImportImage     _import;
+        private SegmenеtedImage _image;
         public Form1()
         {
             InitializeComponent();
+            _import = new ImportImage();
         }
 
         private void trackBarSizeSuperpixel_Scroll(object sender, EventArgs e)
@@ -42,37 +43,30 @@ namespace AirPhotoClassifier
 
         private void buttonImportImage_Click(object sender, EventArgs e)
         {
-            import.OpenWindow();
-            imageBoxOriginal.Image = import.GetImage();
+            _import.OpenWindow();
+            imageBoxOriginal.Image = _import.GetImage();
         }
 
         private void buttonStartSegmentation_Click(object sender, EventArgs e)
         {
-            Mat image = import.GetImage();
-            if (image == null)
+            Mat inputImage = _import.GetImage();
+            if (inputImage == null)
             {
                 return;
             }
-            supperpixel = new SupperpixelSLIC(image,
-                                            SupperpixelSLIC.Algorithm.SLIC,
-                                            (int)fieldSizeSuperpixel.Value,
-                                            (float)fieldRuler.Value);
-            supperpixel.Iterate();
 
+            int   sizeSuperPixel = (int)fieldSizeSuperpixel.Value;
+            float ruler          = (float)fieldRuler.Value;
+            Segmentation segmentation = new  Segmentation(inputImage, sizeSuperPixel, ruler);
 
-            Image<Gray, byte> mask= new Image<Gray, byte>(image.Size);
+            _image = new  SegmenеtedImage(segmentation);
 
-
-            supperpixel.GetLabelContourMask(mask);
-
-            CvInvoke.BitwiseNot(mask, mask);
-
-            image.CopyTo(mask, mask);
-            imageBoxOriginal.Image = mask;
-
+            imageBoxOriginal.Image = _image.OriginalImage;
+            /*
             Size sizeImage = ((Image<Gray,byte>) imageBoxOriginal.Image).Size;
             Size sizeBox =imageBoxOriginal.Size;
             imageBoxOriginal.SetZoomScale(sizeBox.Height / sizeImage.Height, Point.Empty);
+            */
         }
 
         private void fieldRuler_ValueChanged(object sender, EventArgs e)
@@ -94,35 +88,6 @@ namespace AirPhotoClassifier
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Mat mat = new Mat();
-            supperpixel.GetLabels(mat);
-            int[,] array = (int[,]) mat.GetData();
-
-            Image<Gray,byte> mask = new Image<Gray,byte>(mat.Size);
-
-            for (int width = 0; width < array.GetLength(0); width++)
-            {
-                for (int height = 0; height < array.GetLength(1); height++)
-                {
-                    if (array[width, height] != ((int)numericUpDown1.Value) - 1)
-                    {
-                        mask.Data[width, height, 0] = 255;
-                    }
-
-                }
-            }
-
-            import.GetImage().CopyTo(mask, mask);
-
-            imageBoxSegmentation.Image = mask;
-
-            Size sizeImage = ((Image<Gray,byte>) imageBoxSegmentation.Image).Size;
-            Size sizeBox = imageBoxSegmentation.Size;
-            imageBoxSegmentation.SetZoomScale(sizeBox.Height / sizeImage.Height, Point.Empty);
-        }
-
         private void imageBoxSegmentation_MouseMove(object sender, MouseEventArgs e)
         {
 
@@ -130,12 +95,10 @@ namespace AirPhotoClassifier
             
             mousePostotion.X = imageBoxSegmentation.HorizontalScrollBar.Value + (int)(e.X / imageBoxSegmentation.ZoomScale);
             mousePostotion.Y = imageBoxSegmentation.VerticalScrollBar.Value + (int)(e.Y / imageBoxSegmentation.ZoomScale);
-            label2.Text = imageBoxSegmentation.HorizontalScrollBar.Value.ToString();
-            label3.Text = imageBoxSegmentation.ZoomScale.ToString();
 
             //интерактив
             Mat mat = new Mat();
-            supperpixel.GetLabels(mat);
+          //  supperpixel.GetLabels(mat);
             int[,] array = (int[,])mat.GetData();
 
             Image<Gray, byte> mask = new Image<Gray, byte>(mat.Size);
@@ -151,7 +114,7 @@ namespace AirPhotoClassifier
 
                 }
             }
-            import.GetImage().CopyTo(mask, mask);
+            _import.GetImage().CopyTo(mask, mask);
             imageBoxSegmentation.Image = mask;
         }
     }

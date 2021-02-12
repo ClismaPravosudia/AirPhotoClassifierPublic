@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Segmentation.cs" />
     <Compile Include="Components\SuperPixel.cs" />
     <Compile Include="Components\SegmenеtedImage.cs" />
     <Compile Include="Components\ImportImage.cs" />
