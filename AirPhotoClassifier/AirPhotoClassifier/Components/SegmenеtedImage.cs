@@ -18,9 +18,6 @@ namespace AirPhotoClassifier.Components
 
         private SuperPixel[] _superPixels;
         private int[,]       _superPixelsToImage;
-
-        public delegate void CreateSuperPixelsHandler();
-        public static event CreateSuperPixelsHandler ActionCreateSuperPixel;
         public SegmenеtedImage(Segmentation algorithm)
         {
             _image              = algorithm.GetInputImage();
@@ -101,28 +98,22 @@ namespace AirPhotoClassifier.Components
                     sizeSuperPixels[_superPixelsToImage[x, y]]++;
                 }
             }
-            //Заполняем массив суперпикселей
+            //Создаем массив суперпикселей
             _superPixels = new SuperPixel[countSuperPixel];
-            for(int i = 0; i < _superPixels.Length; i++)
+            for (int i = 0; i < _superPixels.Length; i++)
             {
-                ActionCreateSuperPixel?.Invoke();
-                Point[] points = new Point[sizeSuperPixels[i]];
-                int indexPoints = 0;
-                for (int x = 0; x < _superPixelsToImage.GetLength(0); x++)
-                {
-                    for (int y = 0; y < _superPixelsToImage.GetLength(1); y++)
-                    {
-                        if(_superPixelsToImage[x,y] == i)
-                        {
-                            points[indexPoints].X = x;
-                            points[indexPoints].Y = y;
-                            indexPoints++;
-                        }
-                    }
-                }
-
-                _superPixels[i] = new SuperPixel(points);
+                _superPixels[i] = new SuperPixel(sizeSuperPixels[i]);
             }
+            //Заполняем массив суперпикселей
+            for (int x = 0; x < _superPixelsToImage.GetLength(0); x++)
+            {
+                for (int y = 0; y < _superPixelsToImage.GetLength(1); y++)
+                {
+                    Point coordinatesPixel = new Point(x,y);
+                    _superPixels[_superPixelsToImage[x, y]].AddPixel(coordinatesPixel);
+                }
+            }
+            
 
         }
 

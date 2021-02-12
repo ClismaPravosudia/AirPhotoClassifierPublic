@@ -41,7 +41,6 @@
             this.fieldSizeSuperpixel = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.trackBarSizeSuperpixel = new System.Windows.Forms.TrackBar();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxOriginal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxSegmentation)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -91,7 +90,6 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupBox1.Controls.Add(this.progressBar1);
             this.groupBox1.Controls.Add(this.buttonStartSegmentation);
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox2);
@@ -221,14 +219,6 @@
             this.trackBarSizeSuperpixel.Value = 10;
             this.trackBarSizeSuperpixel.Scroll += new System.EventHandler(this.trackBarSizeSuperpixel_Scroll);
             // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(6, 253);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(263, 23);
-            this.progressBar1.TabIndex = 9;
-            this.progressBar1.Visible = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -267,7 +257,6 @@
         private System.Windows.Forms.Button buttonStartSegmentation;
         private System.Windows.Forms.NumericUpDown fieldRuler;
         private System.Windows.Forms.NumericUpDown fieldSizeSuperpixel;
-        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 

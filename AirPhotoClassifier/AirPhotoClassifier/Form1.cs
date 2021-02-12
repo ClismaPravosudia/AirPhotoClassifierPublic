@@ -58,17 +58,13 @@ namespace AirPhotoClassifier
             int   sizeSuperPixel = (int)fieldSizeSuperpixel.Value;
             float ruler          = (float)fieldRuler.Value;
             Segmentation segmentation = new  Segmentation(inputImage, sizeSuperPixel, ruler);
-
-            progressBar1.Maximum = segmentation.SuperPixelCount;
-            SegmenеtedImage.ActionCreateSuperPixel += progressBar1_AddValue;
-            progressBar1.Visible = true;
-
             _image = new  SegmenеtedImage(segmentation);
-
-            progressBar1.Visible = false;
-            progressBar1.Value = 0;
-
-            imageBoxOriginal.Image = _image.OriginalImage;
+            //Проверка 
+            Matrix<Byte> matrix = new Matrix<Byte>( _image.ImageWithContourMask.Rows, 
+                                                    _image.ImageWithContourMask.Cols, 
+                                                    _image.ImageWithContourMask.NumberOfChannels);
+            _image.ImageWithContourMask.CopyTo(matrix);
+            //----------------------------------------
             imageBoxSegmentation.Image = _image.ImageWithContourMask;
             /*
             Size sizeImage = ((Image<Gray,byte>) imageBoxOriginal.Image).Size;
@@ -112,11 +108,6 @@ namespace AirPhotoClassifier
             {
                 imageBoxSegmentation.Image = _image.PickSuperPixel(new Bgr(0, 0, 255), mousePosition);
             }
-        }
-
-        private void progressBar1_AddValue()
-        {
-            progressBar1.Value++;
         }
     }
 }
