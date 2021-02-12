@@ -68,6 +68,8 @@ namespace AirPhotoClassifier.Components
 
         public Image<Bgr, byte> PickSuperPixel(Bgr colorSuperPixel, int x, int y)
         {
+            GC.Collect();//Освобождение памяти от предыдущих Image
+
             Image<Gray, byte> mask = new Image<Gray, byte>( _imageWithMask.Size);
             Image<Bgr, byte> imagePickSuperpixel = new Image<Bgr, byte>( _imageWithMask.Size);
             _imageWithMask.CopyTo(imagePickSuperpixel);
