@@ -1,6 +1,8 @@
 ﻿using Emgu.CV;
+using Emgu.CV.Structure;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,6 +19,8 @@ namespace AirPhotoClassifier.Components
         private SuperPixel[] _superPixels;
         private int[,]       _superPixelsToImage;
 
+        public delegate void CreateSuperPixelsHandler();
+        public static event CreateSuperPixelsHandler ActionCreateSuperPixel;
         public SegmenеtedImage(Segmentation algorithm)
         {
             _image              = algorithm.GetInputImage();
@@ -56,10 +60,40 @@ namespace AirPhotoClassifier.Components
             }
         }
 
-        private void _CreateSuperPixelArray(int size)
+        public bool inBorderImage(Point pixel)
+        {
+            if(pixel.X < _image.Size.Width && pixel.Y < _image.Size.Height)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public Image<Bgr, byte> PickSuperPixel(Bgr colorSuperPixel, int x, int y)
+        {
+            Image<Gray, byte> mask = new Image<Gray, byte>( _imageWithMask.Size);
+            Image<Bgr, byte> imagePickSuperpixel = new Image<Bgr, byte>( _imageWithMask.Size);
+            _imageWithMask.CopyTo(imagePickSuperpixel);
+
+            int indexSuperPixel = _superPixelsToImage[y,x];
+            SuperPixel superPixel = _superPixels[indexSuperPixel];
+            for(int i=0; i< superPixel.Size;i++)
+            {
+                Point pixel = superPixel.GetPixel(i);
+                mask.Data[pixel.X, pixel.Y, 0] = 255;
+            }
+            imagePickSuperpixel.SetValue(colorSuperPixel, mask);
+            return imagePickSuperpixel;
+        }
+
+        public Image<Bgr, byte> PickSuperPixel(Bgr colorSuperPixel, Point pixel)
+        {
+            return PickSuperPixel(colorSuperPixel, pixel.X, pixel.Y);
+        }
+        private void _CreateSuperPixelArray(int countSuperPixel)
         {
             //Считаем размеры каждого суперпикселя
-            int[] sizeSuperPixels = new int[size];
+            int[] sizeSuperPixels = new int[countSuperPixel];
             for (int x = 0; x < _superPixelsToImage.GetLength(0); x++)
             {
                 for (int y = 0; y < _superPixelsToImage.GetLength(1); y++)
@@ -68,9 +102,10 @@ namespace AirPhotoClassifier.Components
                 }
             }
             //Заполняем массив суперпикселей
-            _superPixels = new SuperPixel[size];
+            _superPixels = new SuperPixel[countSuperPixel];
             for(int i = 0; i < _superPixels.Length; i++)
             {
+                ActionCreateSuperPixel?.Invoke();
                 Point[] points = new Point[sizeSuperPixels[i]];
                 int indexPoints = 0;
                 for (int x = 0; x < _superPixelsToImage.GetLength(0); x++)
@@ -85,8 +120,10 @@ namespace AirPhotoClassifier.Components
                         }
                     }
                 }
+
                 _superPixels[i] = new SuperPixel(points);
             }
+
         }
 
 

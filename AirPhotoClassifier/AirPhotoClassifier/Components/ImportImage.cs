@@ -20,7 +20,7 @@ namespace AirPhotoClassifier.Components
         public void OpenWindow()
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "jpg|*.jpg| png|*.png";
+            ofd.Filter = "Изображения|*.jpg;*.png;*.tif|  jpg|*.jpg| png|*.png";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 _image = CvInvoke.Imread(ofd.FileName, Emgu.CV.CvEnum.ImreadModes.AnyColor);

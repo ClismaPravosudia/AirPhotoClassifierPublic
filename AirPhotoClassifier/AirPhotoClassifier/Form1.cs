@@ -59,9 +59,17 @@ namespace AirPhotoClassifier
             float ruler          = (float)fieldRuler.Value;
             Segmentation segmentation = new  Segmentation(inputImage, sizeSuperPixel, ruler);
 
+            progressBar1.Maximum = segmentation.SuperPixelCount;
+            SegmenеtedImage.ActionCreateSuperPixel += progressBar1_AddValue;
+            progressBar1.Visible = true;
+
             _image = new  SegmenеtedImage(segmentation);
 
+            progressBar1.Visible = false;
+            progressBar1.Value = 0;
+
             imageBoxOriginal.Image = _image.OriginalImage;
+            imageBoxSegmentation.Image = _image.ImageWithContourMask;
             /*
             Size sizeImage = ((Image<Gray,byte>) imageBoxOriginal.Image).Size;
             Size sizeBox =imageBoxOriginal.Size;
@@ -90,32 +98,25 @@ namespace AirPhotoClassifier
 
         private void imageBoxSegmentation_MouseMove(object sender, MouseEventArgs e)
         {
-
-            Point mousePostotion = new Point();
-            
-            mousePostotion.X = imageBoxSegmentation.HorizontalScrollBar.Value + (int)(e.X / imageBoxSegmentation.ZoomScale);
-            mousePostotion.Y = imageBoxSegmentation.VerticalScrollBar.Value + (int)(e.Y / imageBoxSegmentation.ZoomScale);
-
-            //интерактив
-            Mat mat = new Mat();
-          //  supperpixel.GetLabels(mat);
-            int[,] array = (int[,])mat.GetData();
-
-            Image<Gray, byte> mask = new Image<Gray, byte>(mat.Size);
-
-            for (int width = 0; width < array.GetLength(0); width++)
+            if(_image == null)
             {
-                for (int height = 0; height < array.GetLength(1); height++)
-                {
-                    if (array[width, height] != (array[ (int)(mousePostotion.Y), (int)(mousePostotion.X)]))
-                    {
-                        mask.Data[width, height, 0] = 255;
-                    }
-
-                }
+                return;
             }
-            _import.GetImage().CopyTo(mask, mask);
-            imageBoxSegmentation.Image = mask;
+
+            Point mousePosition = new Point();
+            
+            mousePosition.X = imageBoxSegmentation.HorizontalScrollBar.Value + (int)(e.X / imageBoxSegmentation.ZoomScale);
+            mousePosition.Y = imageBoxSegmentation.VerticalScrollBar.Value + (int)(e.Y / imageBoxSegmentation.ZoomScale);
+
+            if (_image.inBorderImage(mousePosition))
+            {
+                imageBoxSegmentation.Image = _image.PickSuperPixel(new Bgr(0, 0, 255), mousePosition);
+            }
+        }
+
+        private void progressBar1_AddValue()
+        {
+            progressBar1.Value++;
         }
     }
 }
