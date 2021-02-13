@@ -124,8 +124,9 @@ namespace AirPhotoClassifier
                 svm.SetKernel(SVM.SvmKernelType.Linear);//Тип ядра SVM
                 svm.TermCriteria = new MCvTermCriteria(1000, 1e-6);//Критерии завершения итеративной процедуры обучения SVM, которая решает частный случай задачи квадратичной оптимизации с ограничениями
                 //svm.Train(TrainData, Emgu.CV.ML.MlEnum.DataLayoutType.RowSample, TrainLabel); Тренировка SVM
+             
                 svm.Save("svm.txt");//Сохранение CVM в файл
-                
+               
                 MessageBox.Show("SVM is trained.");
             }
             catch (Exception ex)
@@ -134,5 +135,12 @@ namespace AirPhotoClassifier
             }
         }
 
+        private void buttonOpenColorDialog_Click(object sender, EventArgs e)
+        {
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                
+            }
+        }
     }
 }

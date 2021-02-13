@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AirPhotoClassifier.Extension
 {
-    class MatExtension
+    class BgrExtension
     {
 
     }

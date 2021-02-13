@@ -78,7 +78,7 @@ namespace AirPhotoClassifier.Components
             SuperPixel superPixel = _superPixels[indexSuperPixel];
             for(int i=0; i< superPixel.Size;i++)
             {
-                Point pixel = superPixel.GetPixel(i);
+                Point pixel = superPixel.GetPixel(i).Coordinates;
                 mask.Data[pixel.X, pixel.Y, 0] = 255;
             }
             imagePickSuperpixel.SetValue(colorSuperPixel, mask);
@@ -106,13 +106,19 @@ namespace AirPhotoClassifier.Components
             {
                 _superPixels[i] = new SuperPixel(sizeSuperPixels[i]);
             }
+
+            byte[,,] colors =(byte[,,]) _image.GetData();
+
             //Заполняем массив суперпикселей
             for (int x = 0; x < _superPixelsToImage.GetLength(0); x++)
             {
                 for (int y = 0; y < _superPixelsToImage.GetLength(1); y++)
                 {
-                    Point coordinatesPixel = new Point(x,y);
-                    _superPixels[_superPixelsToImage[x, y]].AddPixel(coordinatesPixel);
+                    Pixel pixel       = new Pixel();
+                    pixel.Color       = new Bgr(colors[x, y, 0], colors[x, y, 1], colors[x, y, 2]);
+                    pixel.Coordinates = new Point(x, y);
+ 
+                    _superPixels[_superPixelsToImage[x, y]].AddPixel(pixel);
                 }
             }
             
