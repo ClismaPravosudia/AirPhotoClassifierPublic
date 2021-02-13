@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Emgu.CV.UI.ImageBox;
+using Emgu.CV.ML;//библиотека для машинного обучения
 
 namespace AirPhotoClassifier
 {
@@ -24,6 +25,8 @@ namespace AirPhotoClassifier
     {
         private ImportImage     _import;
         private SegmenеtedImage _image;
+        SVM svm;
+
         public Form1()
         {
             InitializeComponent();
@@ -109,5 +112,27 @@ namespace AirPhotoClassifier
                 imageBoxSegmentation.Image = _image.PickSuperPixel(new Bgr(0, 0, 255), mousePosition);
             }
         }
+        private void trainSVMButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+             
+                svm = new SVM();
+                svm.C = 100;//Параметр C задачи оптимизации SVM
+                svm.Type = SVM.SvmType.CSvc;//Тип формулировки SVM
+                svm.Gamma = 0.005;//Параметр гамма функции ядра (Скорость обучения?)
+                svm.SetKernel(SVM.SvmKernelType.Linear);//Тип ядра SVM
+                svm.TermCriteria = new MCvTermCriteria(1000, 1e-6);//Критерии завершения итеративной процедуры обучения SVM, которая решает частный случай задачи квадратичной оптимизации с ограничениями
+                //svm.Train(TrainData, Emgu.CV.ML.MlEnum.DataLayoutType.RowSample, TrainLabel); Тренировка SVM
+                svm.Save("svm.txt");//Сохранение CVM в файл
+                
+                MessageBox.Show("SVM is trained.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
     }
 }
