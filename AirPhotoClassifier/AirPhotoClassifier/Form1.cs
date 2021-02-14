@@ -122,35 +122,6 @@ namespace AirPhotoClassifier
                 imageBoxSegmentation.Image = _image.PickSuperPixel(new Bgr(0, 0, 255), mousePosition);
             }
         }
-        private void trainSVMButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                rTrees = new RTrees();
-                rTrees.ActiveVarCount = 500;//Размер случайно выбранного подмножества функций в каждом узле дерева, которые используются для поиска наилучшего разделения (я)(предположу что это колличество деревьев)
-                rTrees.CalculateVarImportance = true;//Если true, то будет рассчитана важность переменной.(хз на что влияет)
-                rTrees.MaxDepth = 25;//Максимально возможная глубина дерева
-                rTrees.MinSampleCount = 2;//Если количество выборок в узле меньше этого параметра, узел не будет разделен.
-                rTrees.TermCriteria = new MCvTermCriteria(1000, 1e-6);//Критерии завершения, указывающие, когда алгоритм обучения останавливается
-                //rtrees.Train(TrainData, Emgu.CV.ML.MlEnum.DataLayoutType.RowSample, TrainLabel); Тренировка SVM
-               // svm = new SVM();
-                //svm.C = 100;//Параметр C задачи оптимизации SVM
-                //svm.Type = SVM.SvmType.CSvc;//Тип формулировки SVM
-                //svm.Gamma = 0.005;//Параметр гамма функции ядра (Скорость обучения?)
-                //svm.SetKernel(SVM.SvmKernelType.Linear);//Тип ядра SVM
-                //svm.TermCriteria = new MCvTermCriteria(1000, 1e-6);//Критерии завершения итеративной процедуры обучения SVM, которая решает частный случай задачи квадратичной оптимизации с ограничениями
-                //svm.Train(TrainData, Emgu.CV.ML.MlEnum.DataLayoutType.RowSample, TrainLabel); Тренировка SVM
-             
-                //svm.Save("svm.txt");//Сохранение CVM в файл
-               
-                MessageBox.Show("SVM is trained.");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private void buttonOpenColorDialog_Click(object sender, EventArgs e)
         {
             if (colorDialog.ShowDialog() == DialogResult.OK)
@@ -158,5 +129,19 @@ namespace AirPhotoClassifier
                 
             }
         }
+
+        private void RandomTreeButton_Click(object sender, EventArgs e)
+        {
+                //try
+               // {
+                Classifier.GetTrain();
+                MessageBox.Show("SVM is trained.");
+               // }
+                //catch (Exception ex)
+                //{
+                 //   MessageBox.Show(ex.Message);
+                //}
+            }
+        }
     }
-}
+

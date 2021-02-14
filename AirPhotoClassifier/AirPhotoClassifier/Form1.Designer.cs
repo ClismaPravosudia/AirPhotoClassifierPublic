@@ -33,6 +33,8 @@
             this.imageBoxSegmentation = new Emgu.CV.UI.ImageBox();
             this.buttonImportImage = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonOpenColorDialog = new System.Windows.Forms.Button();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.buttonStartSegmentation = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.fieldRuler = new System.Windows.Forms.NumericUpDown();
@@ -41,9 +43,8 @@
             this.fieldSizeSuperpixel = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.trackBarSizeSuperpixel = new System.Windows.Forms.TrackBar();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.buttonOpenColorDialog = new System.Windows.Forms.Button();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.RandomTreeButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxOriginal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxSegmentation)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -59,7 +60,7 @@
             // 
             this.imageBoxOriginal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.imageBoxOriginal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imageBoxOriginal.Location = new System.Drawing.Point(12, 439);
+            this.imageBoxOriginal.Location = new System.Drawing.Point(12, 482);
             this.imageBoxOriginal.Name = "imageBoxOriginal";
             this.imageBoxOriginal.Size = new System.Drawing.Size(263, 263);
             this.imageBoxOriginal.TabIndex = 2;
@@ -73,7 +74,7 @@
             this.imageBoxSegmentation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.imageBoxSegmentation.Location = new System.Drawing.Point(293, 12);
             this.imageBoxSegmentation.Name = "imageBoxSegmentation";
-            this.imageBoxSegmentation.Size = new System.Drawing.Size(595, 690);
+            this.imageBoxSegmentation.Size = new System.Drawing.Size(595, 733);
             this.imageBoxSegmentation.TabIndex = 2;
             this.imageBoxSegmentation.TabStop = false;
             this.imageBoxSegmentation.MouseMove += new System.Windows.Forms.MouseEventHandler(this.imageBoxSegmentation_MouseMove);
@@ -93,6 +94,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(this.RandomTreeButton);
             this.groupBox1.Controls.Add(this.buttonOpenColorDialog);
             this.groupBox1.Controls.Add(this.listView1);
             this.groupBox1.Controls.Add(this.buttonStartSegmentation);
@@ -101,10 +103,30 @@
             this.groupBox1.Controls.Add(this.buttonImportImage);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(275, 421);
+            this.groupBox1.Size = new System.Drawing.Size(275, 464);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Параметры";
+            // 
+            // buttonOpenColorDialog
+            // 
+            this.buttonOpenColorDialog.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonOpenColorDialog.Location = new System.Drawing.Point(6, 375);
+            this.buttonOpenColorDialog.Name = "buttonOpenColorDialog";
+            this.buttonOpenColorDialog.Size = new System.Drawing.Size(263, 35);
+            this.buttonOpenColorDialog.TabIndex = 10;
+            this.buttonOpenColorDialog.Text = "Выбрать цвет";
+            this.buttonOpenColorDialog.UseVisualStyleBackColor = true;
+            this.buttonOpenColorDialog.Click += new System.EventHandler(this.buttonOpenColorDialog_Click);
+            // 
+            // listView1
+            // 
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(6, 253);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(263, 116);
+            this.listView1.TabIndex = 9;
+            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // buttonStartSegmentation
             // 
@@ -224,31 +246,21 @@
             this.trackBarSizeSuperpixel.Value = 10;
             this.trackBarSizeSuperpixel.Scroll += new System.EventHandler(this.trackBarSizeSuperpixel_Scroll);
             // 
-            // listView1
+            // RandomTreeButton
             // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(6, 253);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(263, 116);
-            this.listView1.TabIndex = 9;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
-            // buttonOpenColorDialog
-            // 
-            this.buttonOpenColorDialog.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonOpenColorDialog.Location = new System.Drawing.Point(6, 375);
-            this.buttonOpenColorDialog.Name = "buttonOpenColorDialog";
-            this.buttonOpenColorDialog.Size = new System.Drawing.Size(263, 35);
-            this.buttonOpenColorDialog.TabIndex = 10;
-            this.buttonOpenColorDialog.Text = "Выбрать цвет";
-            this.buttonOpenColorDialog.UseVisualStyleBackColor = true;
-            this.buttonOpenColorDialog.Click += new System.EventHandler(this.buttonOpenColorDialog_Click);
+            this.RandomTreeButton.Location = new System.Drawing.Point(12, 429);
+            this.RandomTreeButton.Name = "RandomTreeButton";
+            this.RandomTreeButton.Size = new System.Drawing.Size(102, 23);
+            this.RandomTreeButton.TabIndex = 11;
+            this.RandomTreeButton.Text = "Классификация";
+            this.RandomTreeButton.UseVisualStyleBackColor = true;
+            this.RandomTreeButton.Click += new System.EventHandler(this.RandomTreeButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(900, 714);
+            this.ClientSize = new System.Drawing.Size(900, 757);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.imageBoxSegmentation);
             this.Controls.Add(this.imageBoxOriginal);
@@ -285,6 +297,7 @@
         private System.Windows.Forms.Button buttonOpenColorDialog;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColorDialog colorDialog;
+        private System.Windows.Forms.Button RandomTreeButton;
     }
 }
 
