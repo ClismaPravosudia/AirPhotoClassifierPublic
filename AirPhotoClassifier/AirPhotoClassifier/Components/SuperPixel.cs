@@ -1,11 +1,5 @@
-﻿
-using Emgu.CV.Structure;
+﻿using Emgu.CV.Structure.Extension;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AirPhotoClassifier.Components
 {
@@ -13,16 +7,15 @@ namespace AirPhotoClassifier.Components
     {
         private Pixel[] _pixels;
         private int     _indexEmptyPixel;
-
-
-        private Parameteres signs;
+        private Signs   _signs;
 
         public Pixel[] Pixels => _pixels;
         public int Size => _pixels.Length;
-
+        public Signs Parameteres => _signs;
         public SuperPixel(int size)
         {
             _pixels = new Pixel[size];
+            _signs  = new Signs();
         }
 
         public Pixel GetPixel(int index)
@@ -43,39 +36,39 @@ namespace AirPhotoClassifier.Components
             }
         }
 
-        public class Parameteres
+        public struct Signs
         {
-            private Bgr maxColor;
-            private Bgr minColor;
-            private Bgr midColor;
-            private Bgr dispersionColor;
+            private Color _maxColor;
+            private Color _minColor;
+            private Color _midColor;
+            private Color _dispersionColor;
+
+            public Color Maximum => _maxColor ?? Color.Empty;
+            public Color Minimum => _minColor ?? Color.Empty;
+            public Color Middle => _midColor ?? Color.Empty;
+            public Color Dispersion => _dispersionColor ?? Color.Empty;
 
             public void Calculate(SuperPixel superPixel)
             {
-                Bgr[] colors = new Bgr[superPixel.Pixels.Length];
+                Color[] colors = new Color[superPixel.Pixels.Length];
                 double[] allcolors = new double[3];
                 for (int i = 0; i < colors.Length; i++)
                 {
-                    colors[i] = superPixel.Pixels[i].Color;
-                    allcolors[0] += colors[i].Blue;
-                    allcolors[1] += colors[i].Green;
-                    allcolors[2] += colors[i].Red;
+                    colors[i] = new Color(superPixel.Pixels[i].Color);
                 }
-
-                allcolors[0] /= colors.Length;
-                allcolors[1] /= colors.Length;
-                allcolors[2] /= colors.Length;
-                midColor = new Bgr(allcolors[0], allcolors[1], allcolors[2]);
-
-                maxColor = colors[0];
-                minColor = colors[0];
+                //Находим  minColor, maxColor, midColor
+                _minColor = colors[0];
+                _maxColor = colors[0];
+                Color sumColors = new Color();
                 for (int i = 0; i < colors.Length; i++)
                 {
-                   
+                    _minColor = _minColor < colors[i];
+                    _maxColor = _maxColor > colors[i];
+                    sumColors += colors[i];
                 }
+                _midColor = sumColors / colors.Length;
+
             }
-
-
         }
     }
 
