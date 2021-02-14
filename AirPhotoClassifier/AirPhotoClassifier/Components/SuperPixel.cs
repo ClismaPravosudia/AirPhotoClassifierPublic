@@ -51,7 +51,6 @@ namespace AirPhotoClassifier.Components
             public void Calculate(SuperPixel superPixel)
             {
                 Color[] colors = new Color[superPixel.Pixels.Length];
-                double[] allcolors = new double[3];
                 for (int i = 0; i < colors.Length; i++)
                 {
                     colors[i] = new Color(superPixel.Pixels[i].Color);
@@ -59,15 +58,26 @@ namespace AirPhotoClassifier.Components
                 //Находим  minColor, maxColor, midColor
                 _minColor = colors[0];
                 _maxColor = colors[0];
-                Color sumColors = new Color();
-                for (int i = 0; i < colors.Length; i++)
                 {
-                    _minColor = _minColor < colors[i];
-                    _maxColor = _maxColor > colors[i];
-                    sumColors += colors[i];
+                    Color sumColors = new Color();
+                    for (int i = 0; i < colors.Length; i++)
+                    {
+                        _minColor = _minColor < colors[i];
+                        _maxColor = _maxColor > colors[i];
+                        sumColors += colors[i];
+                    }
+                    _midColor = sumColors / colors.Length;
                 }
-                _midColor = sumColors / colors.Length;
 
+                {
+                    Color sumColors = new Color();
+                    for (int i = 0; i < colors.Length; i++)
+                    {
+                        Color dif = colors[i] - _midColor;
+                        sumColors += dif*dif;
+                    }
+                    _dispersionColor = sumColors * (1 / superPixel.Size);
+                }
             }
         }
     }

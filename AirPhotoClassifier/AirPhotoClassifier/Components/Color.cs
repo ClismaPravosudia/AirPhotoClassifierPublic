@@ -32,12 +32,35 @@ namespace Emgu.CV.Structure.Extension
             o.Red += color.Red;
             return o;
         }
+        public static Color operator -(Color o, Color color)
+        {
+            o.Blue = o.Blue - color.Blue;
+            o.Green = o.Green - color.Green;
+            o.Red = o.Red - color.Red;
+            return o;
+        }
 
         public static Color operator / (Color o, int value)
         {
             o.Blue /= value;
             o.Green /= value;
             o.Red /= value;
+            return o;
+        }
+
+        public static Color operator *(Color o, Color color)
+        {
+            o.Blue *= color.Blue;
+            o.Green *= color.Green;
+            o.Red *= color.Red;
+            return o;
+        }
+
+        public static Color operator *(Color o, double value)
+        {
+            o.Blue *= value;
+            o.Green *= value;
+            o.Red *= value;
             return o;
         }
         public static Color operator < (Color o, Color color)
