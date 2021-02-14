@@ -12,31 +12,31 @@ namespace AirPhotoClassifier.Components
 {
     class Classifier
     {
-        static Matrix<double> matrix;
+        static Matrix<float> matrix;
         public static void ToMatrix(SegmenеtedImage image)
         {
             SuperPixel [] superPixels = image.SuperPixels;
 
-             matrix =  new Matrix<double>(3*superPixels[0].Parameteres.Count,
+             matrix =  new Matrix<float>(3*superPixels[0].Parameteres.Count,
                                                           superPixels.Length);
 
             for (int height = 0; height < matrix.Cols; height++)
             {
-                matrix.Data[0, height] = superPixels[height].Parameteres.Minimum.Blue;
-                matrix.Data[1, height] = superPixels[height].Parameteres.Minimum.Green;
-                matrix.Data[2, height] = superPixels[height].Parameteres.Minimum.Red;
+                matrix.Data[0, height] = (float)superPixels[height].Parameteres.Minimum.Blue;
+                matrix.Data[1, height] = (float)superPixels[height].Parameteres.Minimum.Green;
+                matrix.Data[2, height] = (float)superPixels[height].Parameteres.Minimum.Red;
 
-                matrix.Data[3, height] = superPixels[height].Parameteres.Maximum.Blue;
-                matrix.Data[4, height] = superPixels[height].Parameteres.Maximum.Green;
-                matrix.Data[5, height] = superPixels[height].Parameteres.Maximum.Red;
+                matrix.Data[3, height] = (float)superPixels[height].Parameteres.Maximum.Blue;
+                matrix.Data[4, height] = (float)superPixels[height].Parameteres.Maximum.Green;
+                matrix.Data[5, height] = (float)superPixels[height].Parameteres.Maximum.Red;
 
-                matrix.Data[6, height] = superPixels[height].Parameteres.Middle.Blue;
-                matrix.Data[7, height] = superPixels[height].Parameteres.Middle.Green;
-                matrix.Data[8, height] = superPixels[height].Parameteres.Middle.Red;
+                matrix.Data[6, height] = (float)superPixels[height].Parameteres.Middle.Blue;
+                matrix.Data[7, height] = (float)superPixels[height].Parameteres.Middle.Green;
+                matrix.Data[8, height] = (float)superPixels[height].Parameteres.Middle.Red;
 
-                matrix.Data[9, height] = superPixels[height].Parameteres.Dispersion.Blue;
-                matrix.Data[10, height] = superPixels[height].Parameteres.Dispersion.Green;
-                matrix.Data[11, height] = superPixels[height].Parameteres.Dispersion.Red;
+                matrix.Data[9, height] = (float)superPixels[height].Parameteres.Dispersion.Blue;
+                matrix.Data[10, height] = (float)superPixels[height].Parameteres.Dispersion.Green;
+                matrix.Data[11, height] = (float)superPixels[height].Parameteres.Dispersion.Red;
                 
             }
 
@@ -44,7 +44,7 @@ namespace AirPhotoClassifier.Components
         public static void GetTrain()
         {
             RTrees rTrees;
-            Matrix<double> TestTrain= new Matrix<double>(12,10);
+            Matrix<float> TestTrain= new Matrix<float>(12,10);
             for (int i = 0; i < 12; i++)
             {
                 for (int j = 0; j < 10; j++)
@@ -53,17 +53,17 @@ namespace AirPhotoClassifier.Components
                     
                 }
             }
-            Matrix<double> TrainLabel= new Matrix<double>(10, 1);
+            Matrix<float> TrainLabel= new Matrix<float>(1, 10);
             TrainLabel.Data[0, 0] = 1;
-            TrainLabel.Data[1, 0] = 1;
-            TrainLabel.Data[2, 0] = 1;
-            TrainLabel.Data[3, 0] = 1;
-            TrainLabel.Data[4, 0] = 1;
-            TrainLabel.Data[5, 0] = 2;
-            TrainLabel.Data[6, 0] = 2;
-            TrainLabel.Data[7, 0] = 2;
-            TrainLabel.Data[8, 0] = 2;
-            TrainLabel.Data[9, 0] = 2;
+            TrainLabel.Data[0, 1] = 1;
+            TrainLabel.Data[0, 2] = 1;
+            TrainLabel.Data[0, 3] = 1;
+            TrainLabel.Data[0, 4] = 1;
+            TrainLabel.Data[0, 5] = 2;
+            TrainLabel.Data[0, 6] = 2;
+            TrainLabel.Data[0, 7] = 2;
+            TrainLabel.Data[0, 8] = 2;
+            TrainLabel.Data[0, 9] = 2;
 
 
             rTrees = new RTrees();
@@ -72,7 +72,7 @@ namespace AirPhotoClassifier.Components
             rTrees.MaxDepth = 25;//Максимально возможная глубина дерева
             rTrees.MinSampleCount = 2;//Если количество выборок в узле меньше этого параметра, узел не будет разделен.
             rTrees.TermCriteria = new MCvTermCriteria(1000, 1e-6);//Критерии завершения, указывающие, когда алгоритм обучения останавливается
-            rTrees.Train(matrix, Emgu.CV.ML.MlEnum.DataLayoutType.RowSample, TrainLabel); //Тренировка RandomFree
+            rTrees.Train(matrix, Emgu.CV.ML.MlEnum.DataLayoutType.ColSample, TrainLabel); //Тренировка RandomFree
             int p =0;
             float a = rTrees.Predict(matrix.GetCol(p));
             int x = 0;                                                                                                   // svm = new SVM();
