@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Classifier.cs" />
     <Compile Include="Components\Color.cs" />
     <Compile Include="Components\Pixel.cs" />
     <Compile Include="Components\Segmentation.cs" />

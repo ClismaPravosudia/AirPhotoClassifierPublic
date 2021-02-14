@@ -25,19 +25,22 @@ namespace AirPhotoClassifier.Components
 
         public void AddPixel( Pixel pixel)
         {
-            if(_indexEmptyPixel < Size)
-            {
-                _pixels[_indexEmptyPixel] = pixel;
-                _indexEmptyPixel++;
-            }
-            else
+            if(_indexEmptyPixel >= Size)
             {
                 throw new ArgumentOutOfRangeException("SuperPixel переполнен");
+            }
+            _pixels[_indexEmptyPixel] = pixel;
+            _indexEmptyPixel++;
+
+            if(_indexEmptyPixel == Size)
+            {
+                _signs.Calculate(this);
             }
         }
 
         public struct Signs
         {
+            public int Count { get => 4; }
             private Color _maxColor;
             private Color _minColor;
             private Color _midColor;

@@ -26,12 +26,25 @@ namespace AirPhotoClassifier
         private ImportImage     _import;
         private SegmenеtedImage _image;
         //SVM svm;
-        RTrees rTrees
+        RTrees rTrees;
 
         public Form1()
         {
             InitializeComponent();
             _import = new ImportImage();
+
+            int count = 1;
+            Matrix<double> matrix =  new Matrix<double>(3,3);
+            for (int width = 0; width < matrix.Cols; width++)
+            {
+                
+                for (int height = 0; height < matrix.Rows; height++)
+                {
+                    matrix.Data[width, height] = count;
+                    count++;
+                }
+            }
+            int x = 0;
         }
 
         private void trackBarSizeSuperpixel_Scroll(object sender, EventArgs e)
@@ -63,11 +76,7 @@ namespace AirPhotoClassifier
             float ruler          = (float)fieldRuler.Value;
             Segmentation segmentation = new  Segmentation(inputImage, sizeSuperPixel, ruler);
             _image = new  SegmenеtedImage(segmentation);
-            //Проверка 
-            Matrix<Byte> matrix = new Matrix<Byte>( _image.ImageWithContourMask.Rows, 
-                                                    _image.ImageWithContourMask.Cols, 
-                                                    _image.ImageWithContourMask.NumberOfChannels);
-            _image.ImageWithContourMask.CopyTo(matrix);
+            Classifier.ToMatrix(_image);
             //----------------------------------------
             imageBoxSegmentation.Image = _image.ImageWithContourMask;
             /*

@@ -18,6 +18,8 @@ namespace AirPhotoClassifier.Components
 
         private SuperPixel[] _superPixels;
         private int[,]       _superPixelsToImage;
+
+        public SuperPixel[] SuperPixels => _superPixels;
         public SegmenеtedImage(Segmentation algorithm)
         {
             _image              = algorithm.GetInputImage();
