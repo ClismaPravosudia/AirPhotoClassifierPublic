@@ -62,24 +62,24 @@ namespace AirPhotoClassifier.Components
                 _minColor = colors[0];
                 _maxColor = colors[0];
                 {
-                    Color sumColors = new Color();
-                    for (int i = 0; i < colors.Length; i++)
+                    Color sumColors = Color.Empty;
+                    foreach (Color color in colors)
                     {
-                        _minColor = _minColor < colors[i];
-                        _maxColor = _maxColor > colors[i];
-                        sumColors += colors[i];
+                        _minColor = (_minColor < color);
+                        _maxColor = (_maxColor > color);
+                        sumColors += color;
                     }
                     _midColor = sumColors / colors.Length;
                 }
 
                 {
-                    Color sumColors = new Color();
-                    for (int i = 0; i < colors.Length; i++)
+                    Color sumColors = Color.Empty;
+                    foreach (Color color in colors)
                     {
-                        Color dif = colors[i] - _midColor;
+                        Color dif = color - _midColor;
                         sumColors += dif*dif;
                     }
-                    _dispersionColor = sumColors * (1.0 / superPixel.Size);
+                    _dispersionColor = sumColors / superPixel.Size;
                 }
             }
         }

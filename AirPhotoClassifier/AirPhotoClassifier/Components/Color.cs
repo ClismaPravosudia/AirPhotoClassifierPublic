@@ -27,55 +27,62 @@ namespace Emgu.CV.Structure.Extension
 
         public static Color operator + (Color o, Color color)
         {
-            o.Blue += color.Blue;
-            o.Green += color.Green;
-            o.Red += color.Red;
-            return o;
+            Color result = new Color();
+            result.Blue = o.Blue + color.Blue;
+            result.Green = o.Green + color.Green;
+            result.Red = o.Red + color.Red;
+            return result;
         }
         public static Color operator -(Color o, Color color)
         {
-            o.Blue = o.Blue - color.Blue;
-            o.Green = o.Green - color.Green;
-            o.Red = o.Red - color.Red;
-            return o;
+            Color result = new Color();
+            result.Blue = o.Blue - color.Blue;
+            result.Green = o.Green - color.Green;
+            result.Red = o.Red - color.Red;
+            return result;
         }
 
         public static Color operator / (Color o, int value)
         {
-            o.Blue /= value;
-            o.Green /= value;
-            o.Red /= value;
-            return o;
+            Color result = new Color();
+            result.Blue = o.Blue / value;
+            result.Green = o.Green / value;
+            result.Red = o.Red / value;
+            return result;
         }
 
         public static Color operator *(Color o, Color color)
         {
-            o.Blue *= color.Blue;
-            o.Green *= color.Green;
-            o.Red *= color.Red;
-            return o;
+            Color result = new Color();
+            result.Blue = o.Blue * color.Blue;
+            result.Green = o.Green * color.Green;
+            result.Red = o.Red * color.Red;
+            return result;
         }
 
         public static Color operator *(Color o, double value)
         {
-            o.Blue *= value;
-            o.Green *= value;
-            o.Red *= value;
-            return o;
+            Color result = new Color();
+            result.Blue = o.Blue*value;
+            result.Green = o.Green*value;
+            result.Red = o.Red*value;
+            return result;
         }
         public static Color operator < (Color o, Color color)
         {
-            o.Blue = o.Blue < color.Blue ? o.Blue : color.Blue;
-            o.Green = o.Green < color.Green ? o.Green : color.Green;
-            o.Red = o.Red < color.Red ? o.Red : color.Red;
-            return o;
+            Color result = new Color();
+            result.Blue = o.Blue < color.Blue ? o.Blue : color.Blue;
+            result.Green = o.Green < color.Green ? o.Green : color.Green;
+            result.Red = o.Red < color.Red ? o.Red : color.Red;
+            return result;
         }
         public static Color operator > (Color o, Color color)
         {
-            o.Blue = o.Blue > color.Blue ? o.Blue : color.Blue;
-            o.Green = o.Green > color.Green ? o.Green : color.Green;
-            o.Red = o.Red > color.Red ? o.Red : color.Red;
-            return o;
+            Color result = new Color();
+            result.Blue = o.Blue > color.Blue ? o.Blue : color.Blue;
+            result.Green = o.Green > color.Green ? o.Green : color.Green;
+            result.Red = o.Red > color.Red ? o.Red : color.Red;
+            return result;
         }
     }
 }

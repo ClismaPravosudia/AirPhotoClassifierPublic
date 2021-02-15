@@ -129,6 +129,7 @@ namespace AirPhotoClassifier.Components
         {
             //Считаем размеры каждого суперпикселя
             int[] sizeSuperPixels = new int[countSuperPixel];
+            
             for (int x = 0; x < _superPixelsToImage.GetLength(0); x++)
             {
                 for (int y = 0; y < _superPixelsToImage.GetLength(1); y++)
@@ -157,8 +158,7 @@ namespace AirPhotoClassifier.Components
                     _superPixels[_superPixelsToImage[x, y]].AddPixel(pixel);
                 }
             }
-            
-
+         
         }
 
 
