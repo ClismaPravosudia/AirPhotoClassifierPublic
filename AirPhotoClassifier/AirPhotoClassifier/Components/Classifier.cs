@@ -44,6 +44,8 @@ namespace AirPhotoClassifier.Components
         public static void GetTrain()
         {
             RTrees rTrees;
+            //SVM svm;
+            //svm = new SVM();
             Matrix<float> TestTrain= new Matrix<float>(12,10);
             for (int i = 0; i < 12; i++)
             {
@@ -53,7 +55,7 @@ namespace AirPhotoClassifier.Components
                     
                 }
             }
-            Matrix<float> TrainLabel= new Matrix<float>(1, 10);
+            Matrix<int> TrainLabel= new Matrix<int>(1, 10);
             TrainLabel.Data[0, 0] = 1;
             TrainLabel.Data[0, 1] = 1;
             TrainLabel.Data[0, 2] = 1;
@@ -64,25 +66,29 @@ namespace AirPhotoClassifier.Components
             TrainLabel.Data[0, 7] = 2;
             TrainLabel.Data[0, 8] = 2;
             TrainLabel.Data[0, 9] = 2;
+            
+
 
 
             rTrees = new RTrees();
-            rTrees.ActiveVarCount = 500;//Размер случайно выбранного подмножества функций в каждом узле дерева, которые используются для поиска наилучшего разделения (я)(предположу что это колличество деревьев)
-            rTrees.CalculateVarImportance = true;//Если true, то будет рассчитана важность переменной.(хз на что влияет)
+            rTrees.ActiveVarCount = 100;//Размер случайно выбранного подмножества функций в каждом узле дерева, которые используются для поиска наилучшего разделения (я)(предположу что это колличество деревьев)
+            //rTrees.CalculateVarImportance = true;//Если true, то будет рассчитана важность переменной.(хз на что влияет)
             rTrees.MaxDepth = 25;//Максимально возможная глубина дерева
+            rTrees.MaxCategories = 100;
             rTrees.MinSampleCount = 2;//Если количество выборок в узле меньше этого параметра, узел не будет разделен.
             rTrees.TermCriteria = new MCvTermCriteria(1000, 1e-6);//Критерии завершения, указывающие, когда алгоритм обучения останавливается
-            rTrees.Train(matrix, Emgu.CV.ML.MlEnum.DataLayoutType.ColSample, TrainLabel); //Тренировка RandomFree
+            rTrees.Train(TestTrain, Emgu.CV.ML.MlEnum.DataLayoutType.ColSample, TrainLabel); //Тренировка RandomFree
             int p =0;
-            float a = rTrees.Predict(matrix.GetCol(p));
-            int x = 0;                                                                                                   // svm = new SVM();
-                                                                                                                    //svm.C = 100;//Параметр C задачи оптимизации SVM
-                                                                                                                    //svm.Type = SVM.SvmType.CSvc;//Тип формулировки SVM
-                                                                                                                    //svm.Gamma = 0.005;//Параметр гамма функции ядра (Скорость обучения?)
-                                                                                                                    //svm.SetKernel(SVM.SvmKernelType.Linear);//Тип ядра SVM
-                                                                                                                    //svm.TermCriteria = new MCvTermCriteria(1000, 1e-6);//Критерии завершения итеративной процедуры обучения SVM, которая решает частный случай задачи квадратичной оптимизации с ограничениями
-                                                                                                                    //svm.Train(TrainData, Emgu.CV.ML.MlEnum.DataLayoutType.RowSample, TrainLabel); Тренировка SVM
-
+            float a = rTrees.Predict(matrix.GetCol(322));
+            int x = 0;
+                                                                                                  //svm.C = 100;//Параметр C задачи оптимизации SVM
+                                                                                                                   //svm.Type = SVM.SvmType.CSvc;//Тип формулировки SVM
+                                                                                                                   //svm.Gamma = 0.005;//Параметр гамма функции ядра (Скорость обучения?)
+                                                                                                                   //svm.SetKernel(SVM.SvmKernelType.Linear);//Тип ядра SVM
+                                                                                                                   //svm.TermCriteria = new MCvTermCriteria(1000, 1e-6);//Критерии завершения итеративной процедуры обучения SVM, которая решает частный случай задачи квадратичной оптимизации с ограничениями
+                                                                                                                   //svm.Train(TestTrain, Emgu.CV.ML.MlEnum.DataLayoutType.ColSample, TrainLabel); //Тренировка SVM
+            //float b = svm.Predict(matrix.GetCol(1000));
+            //int t = 0;
             //svm.Save("svm.txt");//Сохранение CVM в файл
 
 

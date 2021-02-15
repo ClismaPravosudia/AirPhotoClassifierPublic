@@ -27,6 +27,10 @@ namespace AirPhotoClassifier
         private SegmenеtedImage _image;
         //SVM svm;
         RTrees rTrees;
+        string TraingDataPath = @"C:\Users\Harbinger\Desktop\train.csv";
+        string TestDataPath = @"C:\Users\Harbinger\Desktop\test.csv";
+
+
 
         public Form1()
         {
@@ -44,9 +48,9 @@ namespace AirPhotoClassifier
                     count++;
                 }
             }
-            int x = 0;
+            
         }
-
+        
         private void trackBarSizeSuperpixel_Scroll(object sender, EventArgs e)
         {
             fieldSizeSuperpixel.Value = trackBarSizeSuperpixel.Value;
