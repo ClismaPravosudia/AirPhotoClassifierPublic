@@ -122,14 +122,18 @@ namespace AirPhotoClassifier
 
                 //try
                // {
-                Classifier.GetTrain();
+            int[] result = Classifier.GetTrain();
+            for(int i = 0; i<result.Length; i++)
+            {
+                imageBoxSegmentation.Image = _image.FillSuperPixel((Category)listСategory.Items[result[i]], i);
+            }
                // MessageBox.Show("SVM is trained.");
                // }
                 //catch (Exception ex)
                 //{
                  //   MessageBox.Show(ex.Message);
                 //}
-            }
+        }
 
         private void imageBoxSegmentation_MouseClick(object sender, MouseEventArgs e)
         {

@@ -106,6 +106,25 @@ namespace AirPhotoClassifier.Components
             _imageWithMask = image.Mat;
             return image;
         }
+        public Image<Bgr, byte> FillSuperPixel(Category category, int indexSuperPixel)
+        {
+            GC.Collect();//Освобождение памяти от предыдущих Image
+
+            Image<Gray, byte> mask = new Image<Gray, byte>( _imageWithMask.Size);
+            Image<Bgr, byte> imagePickSuperpixel = new Image<Bgr, byte>( _imageWithMask.Size);
+            _imageWithMask.CopyTo(imagePickSuperpixel);
+
+            SuperPixel superPixel = _superPixels[indexSuperPixel];
+            for (int i = 0; i < superPixel.Size; i++)
+            {
+                Point pixel = superPixel.GetPixel(i).Coordinates;
+                mask.Data[pixel.X, pixel.Y, 0] = 255;
+            }
+            Color color = category.BackColor;
+            imagePickSuperpixel.FillMask(new Bgr(color.B, color.G, color.R), mask);
+            _imageWithMask = imagePickSuperpixel.Mat;
+            return imagePickSuperpixel;
+        }
         private void _CreateSuperPixelArray(int countSuperPixel)
         {
             //Считаем размеры каждого суперпикселя

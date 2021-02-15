@@ -92,7 +92,7 @@ namespace AirPhotoClassifier.Components
             }
 
         }
-        public static void GetTrain()
+        public static int[] GetTrain()
         {
             RTrees rTrees;
 
@@ -110,13 +110,8 @@ namespace AirPhotoClassifier.Components
             {
                 categories[i] = (int)rTrees.Predict(matrix.GetCol(i));
             }
-            
-            
-            int x = 0;
 
-
-
-
+            return categories;
 
         }
 
