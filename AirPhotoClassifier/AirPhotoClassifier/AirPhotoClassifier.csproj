@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Category.cs" />
     <Compile Include="Components\Classifier.cs" />
     <Compile Include="Components\Color.cs" />
     <Compile Include="Components\Pixel.cs" />
@@ -88,10 +89,19 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormCreateCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCreateCategory.Designer.cs">
+      <DependentUpon>FormCreateCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCreateCategory.resx">
+      <DependentUpon>FormCreateCategory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

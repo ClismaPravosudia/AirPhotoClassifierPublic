@@ -54,3 +54,4 @@ D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\bin\
 D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\bin\Debug\msvcp140_codecvt_ids.dll
 D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\bin\Debug\opencv_videoio_ffmpeg451.dll
 D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\bin\Debug\vcruntime140.dll
+D:\WORKSPACE\AirPhotoClassifierPublic\AirPhotoClassifier\AirPhotoClassifier\obj\Debug\AirPhotoClassifier.FormCreateCategory.resources

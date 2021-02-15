@@ -29,12 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("1");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("2");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("3");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("4");
             this.imageBoxOriginal = new Emgu.CV.UI.ImageBox();
             this.imageBoxSegmentation = new Emgu.CV.UI.ImageBox();
             this.buttonImportImage = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.buttonOpenColorDialog = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.RandomTreeButton = new System.Windows.Forms.Button();
+            this.buttonAddСategory = new System.Windows.Forms.Button();
+            this.listСategory = new System.Windows.Forms.ListView();
             this.buttonStartSegmentation = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.fieldRuler = new System.Windows.Forms.NumericUpDown();
@@ -43,8 +48,7 @@
             this.fieldSizeSuperpixel = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.trackBarSizeSuperpixel = new System.Windows.Forms.TrackBar();
-            this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.RandomTreeButton = new System.Windows.Forms.Button();
+            this.Column = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxOriginal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxSegmentation)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -95,8 +99,8 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox1.Controls.Add(this.RandomTreeButton);
-            this.groupBox1.Controls.Add(this.buttonOpenColorDialog);
-            this.groupBox1.Controls.Add(this.listView1);
+            this.groupBox1.Controls.Add(this.buttonAddСategory);
+            this.groupBox1.Controls.Add(this.listСategory);
             this.groupBox1.Controls.Add(this.buttonStartSegmentation);
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox2);
@@ -108,25 +112,48 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Параметры";
             // 
-            // buttonOpenColorDialog
+            // RandomTreeButton
             // 
-            this.buttonOpenColorDialog.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonOpenColorDialog.Location = new System.Drawing.Point(6, 375);
-            this.buttonOpenColorDialog.Name = "buttonOpenColorDialog";
-            this.buttonOpenColorDialog.Size = new System.Drawing.Size(263, 35);
-            this.buttonOpenColorDialog.TabIndex = 10;
-            this.buttonOpenColorDialog.Text = "Выбрать цвет";
-            this.buttonOpenColorDialog.UseVisualStyleBackColor = true;
-            this.buttonOpenColorDialog.Click += new System.EventHandler(this.buttonOpenColorDialog_Click);
+            this.RandomTreeButton.Location = new System.Drawing.Point(12, 429);
+            this.RandomTreeButton.Name = "RandomTreeButton";
+            this.RandomTreeButton.Size = new System.Drawing.Size(102, 23);
+            this.RandomTreeButton.TabIndex = 11;
+            this.RandomTreeButton.Text = "Классификация";
+            this.RandomTreeButton.UseVisualStyleBackColor = true;
+            this.RandomTreeButton.Click += new System.EventHandler(this.RandomTreeButton_Click);
             // 
-            // listView1
+            // buttonAddСategory
             // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(6, 253);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(263, 116);
-            this.listView1.TabIndex = 9;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.buttonAddСategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAddСategory.Location = new System.Drawing.Point(6, 375);
+            this.buttonAddСategory.Name = "buttonAddСategory";
+            this.buttonAddСategory.Size = new System.Drawing.Size(263, 35);
+            this.buttonAddСategory.TabIndex = 10;
+            this.buttonAddСategory.Text = "Добавить котiгорию";
+            this.buttonAddСategory.UseVisualStyleBackColor = true;
+            this.buttonAddСategory.Click += new System.EventHandler(this.buttonAddСategory_Click);
+            // 
+            // listСategory
+            // 
+            this.listСategory.Alignment = System.Windows.Forms.ListViewAlignment.Left;
+            this.listСategory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Column});
+            this.listСategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listСategory.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listСategory.HideSelection = false;
+            this.listСategory.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4});
+            this.listСategory.LabelWrap = false;
+            this.listСategory.Location = new System.Drawing.Point(6, 253);
+            this.listСategory.Name = "listСategory";
+            this.listСategory.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.listСategory.Size = new System.Drawing.Size(263, 116);
+            this.listСategory.TabIndex = 9;
+            this.listСategory.UseCompatibleStateImageBehavior = false;
+            this.listСategory.View = System.Windows.Forms.View.Details;
             // 
             // buttonStartSegmentation
             // 
@@ -246,15 +273,10 @@
             this.trackBarSizeSuperpixel.Value = 10;
             this.trackBarSizeSuperpixel.Scroll += new System.EventHandler(this.trackBarSizeSuperpixel_Scroll);
             // 
-            // RandomTreeButton
+            // Column
             // 
-            this.RandomTreeButton.Location = new System.Drawing.Point(12, 429);
-            this.RandomTreeButton.Name = "RandomTreeButton";
-            this.RandomTreeButton.Size = new System.Drawing.Size(102, 23);
-            this.RandomTreeButton.TabIndex = 11;
-            this.RandomTreeButton.Text = "Классификация";
-            this.RandomTreeButton.UseVisualStyleBackColor = true;
-            this.RandomTreeButton.Click += new System.EventHandler(this.RandomTreeButton_Click);
+            this.Column.Text = "Категории:";
+            this.Column.Width = 242;
             // 
             // Form1
             // 
@@ -294,10 +316,10 @@
         private System.Windows.Forms.Button buttonStartSegmentation;
         private System.Windows.Forms.NumericUpDown fieldRuler;
         private System.Windows.Forms.NumericUpDown fieldSizeSuperpixel;
-        private System.Windows.Forms.Button buttonOpenColorDialog;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColorDialog colorDialog;
+        private System.Windows.Forms.Button buttonAddСategory;
+        private System.Windows.Forms.ListView listСategory;
         private System.Windows.Forms.Button RandomTreeButton;
+        private System.Windows.Forms.ColumnHeader Column;
     }
 }
 

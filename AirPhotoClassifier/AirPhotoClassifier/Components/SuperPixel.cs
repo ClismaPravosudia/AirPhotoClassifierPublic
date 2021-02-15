@@ -79,7 +79,7 @@ namespace AirPhotoClassifier.Components
                         Color dif = colors[i] - _midColor;
                         sumColors += dif*dif;
                     }
-                    _dispersionColor = sumColors * (1 / superPixel.Size);
+                    _dispersionColor = sumColors * (1.0 / superPixel.Size);
                 }
             }
         }

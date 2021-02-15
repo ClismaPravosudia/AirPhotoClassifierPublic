@@ -16,8 +16,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static Emgu.CV.UI.ImageBox;
-using Emgu.CV.ML;//библиотека для машинного обучения
 
 namespace AirPhotoClassifier
 {
@@ -25,30 +23,11 @@ namespace AirPhotoClassifier
     {
         private ImportImage     _import;
         private SegmenеtedImage _image;
-        //SVM svm;
-        RTrees rTrees;
-        string TraingDataPath = @"C:\Users\Harbinger\Desktop\train.csv";
-        string TestDataPath = @"C:\Users\Harbinger\Desktop\test.csv";
-
-
 
         public Form1()
         {
             InitializeComponent();
             _import = new ImportImage();
-
-            int count = 1;
-            Matrix<double> matrix =  new Matrix<double>(3,3);
-            for (int width = 0; width < matrix.Cols; width++)
-            {
-                
-                for (int height = 0; height < matrix.Rows; height++)
-                {
-                    matrix.Data[width, height] = count;
-                    count++;
-                }
-            }
-            
         }
         
         private void trackBarSizeSuperpixel_Scroll(object sender, EventArgs e)
@@ -126,11 +105,15 @@ namespace AirPhotoClassifier
                 imageBoxSegmentation.Image = _image.PickSuperPixel(new Bgr(0, 0, 255), mousePosition);
             }
         }
-        private void buttonOpenColorDialog_Click(object sender, EventArgs e)
+        private void buttonAddСategory_Click(object sender, EventArgs e)
         {
-            if (colorDialog.ShowDialog() == DialogResult.OK)
+            FormCreateCategory createCategory = new FormCreateCategory();
+            if(createCategory.ShowDialog() == DialogResult.OK)
             {
-                
+                Category category = new Category(createCategory.NameCategory, createCategory.ColorCategory);
+                listСategory.Items.Add(category.ToString());
+                listСategory.Items[listСategory.Items.Count - 1].BackColor = category.Color;
+              
             }
         }
 
