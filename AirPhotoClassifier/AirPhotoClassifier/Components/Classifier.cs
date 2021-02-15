@@ -17,15 +17,39 @@ namespace AirPhotoClassifier.Components
 
         public Classifier(ListView listCategorys)
         {
+            int countSuperPixel = 0;
             int countCategorys = listCategorys.Items.Count;
             categorys = new Category[countCategorys];
             for (int i = 0; i < countCategorys;i++)
             {
+                categorys[i] = (Category)listCategorys.Items[i];
+                countSuperPixel += categorys[i].SuperPixels.Count;
+            }
+
+            TestTrain = new Matrix<float>(12, countSuperPixel);
+            for (int height = 0; height < TestTrain.Cols; height++)
+            {
+                TestTrain.Data[0, height] = (float)superPixels[height].Parameteres.Minimum.Blue;
+                TestTrain.Data[1, height] = (float)superPixels[height].Parameteres.Minimum.Green;
+                TestTrain.Data[2, height] = (float)superPixels[height].Parameteres.Minimum.Red;
+
+                TestTrain.Data[3, height] = (float)superPixels[height].Parameteres.Maximum.Blue;
+                TestTrain.Data[4, height] = (float)superPixels[height].Parameteres.Maximum.Green;
+                TestTrain.Data[5, height] = (float)superPixels[height].Parameteres.Maximum.Red;
+
+                TestTrain.Data[6, height] = (float)superPixels[height].Parameteres.Middle.Blue;
+                TestTrain.Data[7, height] = (float)superPixels[height].Parameteres.Middle.Green;
+                TestTrain.Data[8, height] = (float)superPixels[height].Parameteres.Middle.Red;
+
+                TestTrain.Data[9, height] = (float)superPixels[height].Parameteres.Dispersion.Blue;
+                TestTrain.Data[10, height] = (float)superPixels[height].Parameteres.Dispersion.Green;
+                TestTrain.Data[11, height] = (float)superPixels[height].Parameteres.Dispersion.Red;
 
             }
         }
 
         static Matrix<float> matrix;
+        static Matrix<float> TestTrain;
         public static void ToMatrix(SegmenеtedImage image)
         {
             SuperPixel [] superPixels = image.SuperPixels;
@@ -59,7 +83,7 @@ namespace AirPhotoClassifier.Components
             RTrees rTrees;
             //SVM svm;
             //svm = new SVM();
-            Matrix<float> TestTrain= new Matrix<float>(12,10);
+            //Matrix<float> TestTrain= new Matrix<float>(12,10);
             for (int i = 0; i < 12; i++)
             {
                 for (int j = 0; j < 10; j++)
