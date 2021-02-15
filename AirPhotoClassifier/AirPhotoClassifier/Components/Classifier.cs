@@ -7,11 +7,24 @@ using System.Text;
 using System.Threading.Tasks;
 using Emgu.CV.ML;
 using Emgu.CV.Structure;
+using System.Windows.Forms;
 
 namespace AirPhotoClassifier.Components
 {
     class Classifier
     {
+        private Category[] categorys;
+
+        public Classifier(ListView listCategorys)
+        {
+            int countCategorys = listCategorys.Items.Count;
+            categorys = new Category[countCategorys];
+            for (int i = 0; i < countCategorys;i++)
+            {
+
+            }
+        }
+
         static Matrix<float> matrix;
         public static void ToMatrix(SegmenеtedImage image)
         {

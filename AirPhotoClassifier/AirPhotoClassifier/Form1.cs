@@ -90,19 +90,19 @@ namespace AirPhotoClassifier
 
         private void imageBoxSegmentation_MouseMove(object sender, MouseEventArgs e)
         {
-            if(_image == null)
+            if (_image == null)
             {
                 return;
             }
 
             Point mousePosition = new Point();
-            
+
             mousePosition.X = imageBoxSegmentation.HorizontalScrollBar.Value + (int)(e.X / imageBoxSegmentation.ZoomScale);
             mousePosition.Y = imageBoxSegmentation.VerticalScrollBar.Value + (int)(e.Y / imageBoxSegmentation.ZoomScale);
 
             if (_image.inBorderImage(mousePosition))
             {
-                imageBoxSegmentation.Image = _image.PickSuperPixel(new Bgr(0, 0, 255), mousePosition);
+               // imageBoxSegmentation.Image = _image.PickSuperPixel(new Bgr(0, 0, 255), mousePosition);
             }
         }
         private void buttonAddСategory_Click(object sender, EventArgs e)
@@ -111,8 +111,7 @@ namespace AirPhotoClassifier
             if(createCategory.ShowDialog() == DialogResult.OK)
             {
                 Category category = new Category(createCategory.NameCategory, createCategory.ColorCategory);
-                listСategory.Items.Add(category.ToString());
-                listСategory.Items[listСategory.Items.Count - 1].BackColor = category.Color;
+                listСategory.Items.Add(category);
               
             }
         }
@@ -129,6 +128,25 @@ namespace AirPhotoClassifier
                  //   MessageBox.Show(ex.Message);
                 //}
             }
+
+        private void imageBoxSegmentation_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (_image == null|| listСategory.SelectedItems.Count<=0)
+            {
+                return;
+            }
+
+            Point mousePosition = new Point();
+
+            mousePosition.X = imageBoxSegmentation.HorizontalScrollBar.Value + (int)(e.X / imageBoxSegmentation.ZoomScale);
+            mousePosition.Y = imageBoxSegmentation.VerticalScrollBar.Value + (int)(e.Y / imageBoxSegmentation.ZoomScale);
+            if (_image.inBorderImage(mousePosition))
+            {
+                Category selectItem = (Category)listСategory.SelectedItems[0];
+                Color color = selectItem.BackColor;
+                imageBoxSegmentation.Image = _image.FillSuperPixel(selectItem, mousePosition);
+            }
         }
     }
+}
 

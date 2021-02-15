@@ -29,10 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("1");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("2");
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("3");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("4");
             this.imageBoxOriginal = new Emgu.CV.UI.ImageBox();
             this.imageBoxSegmentation = new Emgu.CV.UI.ImageBox();
             this.buttonImportImage = new System.Windows.Forms.Button();
@@ -40,6 +36,7 @@
             this.RandomTreeButton = new System.Windows.Forms.Button();
             this.buttonAddСategory = new System.Windows.Forms.Button();
             this.listСategory = new System.Windows.Forms.ListView();
+            this.Column = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonStartSegmentation = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.fieldRuler = new System.Windows.Forms.NumericUpDown();
@@ -48,7 +45,6 @@
             this.fieldSizeSuperpixel = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.trackBarSizeSuperpixel = new System.Windows.Forms.TrackBar();
-            this.Column = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxOriginal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxSegmentation)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -81,6 +77,7 @@
             this.imageBoxSegmentation.Size = new System.Drawing.Size(595, 733);
             this.imageBoxSegmentation.TabIndex = 2;
             this.imageBoxSegmentation.TabStop = false;
+            this.imageBoxSegmentation.MouseClick += new System.Windows.Forms.MouseEventHandler(this.imageBoxSegmentation_MouseClick);
             this.imageBoxSegmentation.MouseMove += new System.Windows.Forms.MouseEventHandler(this.imageBoxSegmentation_MouseMove);
             // 
             // buttonImportImage
@@ -139,13 +136,9 @@
             this.listСategory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Column});
             this.listСategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listСategory.GridLines = true;
             this.listСategory.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listСategory.HideSelection = false;
-            this.listСategory.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3,
-            listViewItem4});
             this.listСategory.LabelWrap = false;
             this.listСategory.Location = new System.Drawing.Point(6, 253);
             this.listСategory.Name = "listСategory";
@@ -154,6 +147,11 @@
             this.listСategory.TabIndex = 9;
             this.listСategory.UseCompatibleStateImageBehavior = false;
             this.listСategory.View = System.Windows.Forms.View.Details;
+            // 
+            // Column
+            // 
+            this.Column.Text = "Категории:";
+            this.Column.Width = 259;
             // 
             // buttonStartSegmentation
             // 
@@ -272,11 +270,6 @@
             this.trackBarSizeSuperpixel.TickFrequency = 10;
             this.trackBarSizeSuperpixel.Value = 10;
             this.trackBarSizeSuperpixel.Scroll += new System.EventHandler(this.trackBarSizeSuperpixel_Scroll);
-            // 
-            // Column
-            // 
-            this.Column.Text = "Категории:";
-            this.Column.Width = 242;
             // 
             // Form1
             // 

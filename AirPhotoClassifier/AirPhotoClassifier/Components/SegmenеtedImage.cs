@@ -1,4 +1,5 @@
-﻿using Emgu.CV;
+﻿using AirPhotoClassifier.Extension;
+using Emgu.CV;
 using Emgu.CV.Structure;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace AirPhotoClassifier.Components
 
         private SuperPixel[] _superPixels;
         private int[,]       _superPixelsToImage;
+
+        private List<List<SuperPixel>> categorySuperPixel;
 
         public SuperPixel[] SuperPixels => _superPixels;
         public SegmenеtedImage(Segmentation algorithm)
@@ -83,13 +86,25 @@ namespace AirPhotoClassifier.Components
                 Point pixel = superPixel.GetPixel(i).Coordinates;
                 mask.Data[pixel.X, pixel.Y, 0] = 255;
             }
-            imagePickSuperpixel.SetValue(colorSuperPixel, mask);
+            imagePickSuperpixel.FillMask(colorSuperPixel, mask);
             return imagePickSuperpixel;
         }
 
         public Image<Bgr, byte> PickSuperPixel(Bgr colorSuperPixel, Point pixel)
         {
             return PickSuperPixel(colorSuperPixel, pixel.X, pixel.Y);
+        }
+
+        public Image<Bgr, byte> FillSuperPixel(Category category, Point pixel)
+        {
+            int indexSuperPixel = _superPixelsToImage[pixel.Y,pixel.X];
+            SuperPixel superPixel = _superPixels[indexSuperPixel];
+            category.SuperPixels.Add(superPixel);
+            Color color = category.BackColor;
+            Bgr   newColor = new Bgr( color.B, color.G, color.R);
+            Image<Bgr,byte> image = PickSuperPixel(newColor, pixel.X, pixel.Y);
+            _imageWithMask = image.Mat;
+            return image;
         }
         private void _CreateSuperPixelArray(int countSuperPixel)
         {

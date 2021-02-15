@@ -83,6 +83,7 @@
     <Compile Include="Components\SuperPixel.cs" />
     <Compile Include="Components\SegmenеtedImage.cs" />
     <Compile Include="Components\ImportImage.cs" />
+    <Compile Include="Extension\ImageExtension.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,8 +161,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extension\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
