@@ -122,7 +122,7 @@ namespace AirPhotoClassifier
 
                 //try
                // {
-                //Classifier.GetTrain();
+                Classifier.GetTrain();
                // MessageBox.Show("SVM is trained.");
                // }
                 //catch (Exception ex)
