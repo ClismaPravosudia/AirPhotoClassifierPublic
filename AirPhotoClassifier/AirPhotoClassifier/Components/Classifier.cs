@@ -27,29 +27,43 @@ namespace AirPhotoClassifier.Components
             }
 
             TestTrain = new Matrix<float>(12, countSuperPixel);
-            for (int height = 0; height < TestTrain.Cols; height++)
+            TrainLabel = new Matrix<int>(1, countSuperPixel);
+
+            int indexMatrix = 0;
+
+            for (int indexCategory = 0; indexCategory < categorys.Length; indexCategory++)
             {
-                TestTrain.Data[0, height] = (float)superPixels[height].Parameteres.Minimum.Blue;
-                TestTrain.Data[1, height] = (float)superPixels[height].Parameteres.Minimum.Green;
-                TestTrain.Data[2, height] = (float)superPixels[height].Parameteres.Minimum.Red;
+                for (int indexSuperPixel = 0; indexSuperPixel < categorys[indexCategory].SuperPixels.Count; indexSuperPixel++)
+                {
+                    TrainLabel[0, indexMatrix] = indexCategory;
 
-                TestTrain.Data[3, height] = (float)superPixels[height].Parameteres.Maximum.Blue;
-                TestTrain.Data[4, height] = (float)superPixels[height].Parameteres.Maximum.Green;
-                TestTrain.Data[5, height] = (float)superPixels[height].Parameteres.Maximum.Red;
+                    SuperPixel superPixel = categorys[indexCategory].SuperPixels[indexSuperPixel];
 
-                TestTrain.Data[6, height] = (float)superPixels[height].Parameteres.Middle.Blue;
-                TestTrain.Data[7, height] = (float)superPixels[height].Parameteres.Middle.Green;
-                TestTrain.Data[8, height] = (float)superPixels[height].Parameteres.Middle.Red;
+                    TestTrain.Data[0, indexMatrix] = (float)superPixel.Parameteres.Minimum.Blue;
+                    TestTrain.Data[1, indexMatrix] = (float)superPixel.Parameteres.Minimum.Green;
+                    TestTrain.Data[2, indexMatrix] = (float)superPixel.Parameteres.Minimum.Red;
 
-                TestTrain.Data[9, height] = (float)superPixels[height].Parameteres.Dispersion.Blue;
-                TestTrain.Data[10, height] = (float)superPixels[height].Parameteres.Dispersion.Green;
-                TestTrain.Data[11, height] = (float)superPixels[height].Parameteres.Dispersion.Red;
+                    TestTrain.Data[3, indexMatrix] = (float)superPixel.Parameteres.Maximum.Blue;
+                    TestTrain.Data[4, indexMatrix] = (float)superPixel.Parameteres.Maximum.Green;
+                    TestTrain.Data[5, indexMatrix] = (float)superPixel.Parameteres.Maximum.Red;
+
+                    TestTrain.Data[6, indexMatrix] = (float)superPixel.Parameteres.Middle.Blue;
+                    TestTrain.Data[7, indexMatrix] = (float)superPixel.Parameteres.Middle.Green;
+                    TestTrain.Data[8, indexMatrix] = (float)superPixel.Parameteres.Middle.Red;
+
+                    TestTrain.Data[9, indexMatrix] = (float)superPixel.Parameteres.Dispersion.Blue;
+                    TestTrain.Data[10, indexMatrix] = (float)superPixel.Parameteres.Dispersion.Green;
+                    TestTrain.Data[11, indexMatrix] = (float)superPixel.Parameteres.Dispersion.Red;
+                    indexMatrix++;
+                }
 
             }
+            int x = 0;
         }
 
         static Matrix<float> matrix;
         static Matrix<float> TestTrain;
+        static Matrix<int> TrainLabel;
         public static void ToMatrix(SegmenеtedImage image)
         {
             SuperPixel [] superPixels = image.SuperPixels;

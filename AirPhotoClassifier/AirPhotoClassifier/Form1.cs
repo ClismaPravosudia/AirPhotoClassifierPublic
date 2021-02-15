@@ -118,10 +118,12 @@ namespace AirPhotoClassifier
 
         private void RandomTreeButton_Click(object sender, EventArgs e)
         {
+            Classifier classifier =  new Classifier(listСategory);
+
                 //try
                // {
-                Classifier.GetTrain();
-                MessageBox.Show("SVM is trained.");
+                //Classifier.GetTrain();
+               // MessageBox.Show("SVM is trained.");
                // }
                 //catch (Exception ex)
                 //{
