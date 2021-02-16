@@ -45,6 +45,7 @@
             this.fieldSizeSuperpixel = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.trackBarSizeSuperpixel = new System.Windows.Forms.TrackBar();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxOriginal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxSegmentation)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -95,6 +96,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.RandomTreeButton);
             this.groupBox1.Controls.Add(this.buttonAddСategory);
             this.groupBox1.Controls.Add(this.listСategory);
@@ -126,7 +128,7 @@
             this.buttonAddСategory.Name = "buttonAddСategory";
             this.buttonAddСategory.Size = new System.Drawing.Size(263, 35);
             this.buttonAddСategory.TabIndex = 10;
-            this.buttonAddСategory.Text = "Добавить котiгорию";
+            this.buttonAddСategory.Text = "Добавить категорию";
             this.buttonAddСategory.UseVisualStyleBackColor = true;
             this.buttonAddСategory.Click += new System.EventHandler(this.buttonAddСategory_Click);
             // 
@@ -271,6 +273,15 @@
             this.trackBarSizeSuperpixel.Value = 10;
             this.trackBarSizeSuperpixel.Scroll += new System.EventHandler(this.trackBarSizeSuperpixel_Scroll);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(178, 438);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "label2";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -280,10 +291,11 @@
             this.Controls.Add(this.imageBoxSegmentation);
             this.Controls.Add(this.imageBoxOriginal);
             this.Name = "Form1";
-            this.Text = "Superpixel HUITA";
+            this.Text = "Superpixel";
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxOriginal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxSegmentation)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fieldRuler)).EndInit();
@@ -313,6 +325,7 @@
         private System.Windows.Forms.ListView listСategory;
         private System.Windows.Forms.Button RandomTreeButton;
         private System.Windows.Forms.ColumnHeader Column;
+        private System.Windows.Forms.Label label2;
     }
 }
 

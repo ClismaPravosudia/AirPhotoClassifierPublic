@@ -123,6 +123,7 @@ namespace AirPhotoClassifier
                 //try
                // {
             int[] result = Classifier.GetTrain();
+            label2.Text = Classifier.GetAccuracy().ToString();
             for(int i = 0; i<result.Length; i++)
             {
                 imageBoxSegmentation.Image = _image.FillSuperPixel((Category)listСategory.Items[result[i]], i);

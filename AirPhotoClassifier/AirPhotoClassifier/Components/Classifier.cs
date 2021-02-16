@@ -14,6 +14,7 @@ namespace AirPhotoClassifier.Components
     class Classifier
     {
         private Category[] categorys;
+        private static RTrees rTrees2;
 
         public Classifier(ListView listCategorys)
         {
@@ -94,26 +95,67 @@ namespace AirPhotoClassifier.Components
         }
         public static int[] GetTrain()
         {
-            RTrees rTrees;
+            RTrees rTrees1;
 
-            rTrees = new RTrees();
-            rTrees.ActiveVarCount = 100;//Размер случайно выбранного подмножества функций в каждом узле дерева, которые используются для поиска наилучшего разделения (я)(предположу что это колличество деревьев)
-            //rTrees.CalculateVarImportance = true;//Если true, то будет рассчитана важность переменной.(хз на что влияет)
-            rTrees.MaxDepth = 25;//Максимально возможная глубина дерева
-            rTrees.MaxCategories = 100;
-            rTrees.MinSampleCount = 2;//Если количество выборок в узле меньше этого параметра, узел не будет разделен.
-            rTrees.TermCriteria = new MCvTermCriteria(1000, 1e-6);//Критерии завершения, указывающие, когда алгоритм обучения останавливается
-            rTrees.Train(TestTrain, Emgu.CV.ML.MlEnum.DataLayoutType.ColSample, TrainLabel); //Тренировка RandomFree
 
-            int[] categories = new int[matrix.Cols];
-            for (int i = 0; i < matrix.Cols; i++)
+            rTrees2 = new RTrees();
+            rTrees2.ActiveVarCount = 5; //(int)Math.Sqrt((double)TestTrain.Cols); //Размер случайно выбранного подмножества функций в каждом узле дерева, которые используются для поиска наилучшего разделения (я)
+            rTrees2.MaxDepth = 25;
+            rTrees2.MinSampleCount = 2;
+            //rTrees.TermCriteria = new MCvTermCriteria(10000, 1e-6);//Критерии завершения, указывающие, когда алгоритм обучения останавливается
+            for (int j = 0; j < 100; j++)
             {
-                categories[i] = (int)rTrees.Predict(matrix.GetCol(i));
-            }
+                rTrees1 = new RTrees();
+                rTrees1.ActiveVarCount = 5; //(int)Math.Sqrt((double)TestTrain.Cols);
+                rTrees1.MaxDepth = 25;//Максимально возможная глубина дерева
 
-            return categories;
+                //rTrees.MaxCategories = 100;
+                rTrees1.MinSampleCount = 2;//Если количество выборок в узле меньше этого параметра, узел не будет разделен.
+               
+                if (j==0)
+                {
+                    rTrees1.Train(TestTrain, Emgu.CV.ML.MlEnum.DataLayoutType.ColSample, TrainLabel); //Тренировка RandomFree
+                    rTrees2 = rTrees1;
+                    continue;
+                }
+                rTrees1.Train(TestTrain, Emgu.CV.ML.MlEnum.DataLayoutType.ColSample, TrainLabel); //Тренировка RandomFree
+                if (Classifier.GetAccuracy(rTrees1)>Classifier.GetAccuracy(rTrees2))
+                {
+                    rTrees2 = rTrees1;
+                }
+                
+            }
+                int[] categories = new int[matrix.Cols];
+                for (int i = 0; i < matrix.Cols; i++)
+                {
+                    categories[i] = (int)rTrees2.Predict(matrix.GetCol(i));
+                }
+            int x = 0;
+                return categories;
+            
 
         }
-
+        private static double GetAccuracy(RTrees rTrees)
+        {
+            double accuracy=0;
+            double tru = 0;
+           
+            for (int i = 0; i < TestTrain.Cols; i++)
+            {
+                float a =rTrees.Predict(TestTrain.GetCol(i));
+                if ((int)a== TrainLabel[0,i])
+                {
+                    tru++;
+                }
+            }
+            accuracy = tru / TestTrain.Cols;
+            return accuracy;
+        }
+        public static double GetAccuracy()
+        {
+          
+            return Classifier.GetAccuracy(rTrees2);
+        }
     }
+
 }
